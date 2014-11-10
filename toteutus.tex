@@ -1,21 +1,38 @@
 % Täällä kerrotaan sivuston sekä kääntäjän teknisestä toteutuksesta.
 
 \section{Tekninen toteutus}
-Miten toteutettu?
+\fxnote{Miten toteutettu?}
+
+Jotta EppaBasic toimisi mahdollisimman monella tietokoneella käyttöjärjestelmästä riippumatta,
+päätimme toteuttaa kaiken ohjelmointi- ja suoritusympäristöä myöten selainpohjaisesti.
+Näin ohjelmointikielemme käyttäminen onnistuu niin Windows-, Linux- ja OS X -koneilla
+kuin myös monilla mobiililaitteilla.
+Lisäksi modernit selaimet tarjoavat monia hyödyllisiä ominaisuuksia
+kuten yksinkertaisen tavan toteuttaa käyttöliittymiä (HTML \cite{w3c_html})
+sekä helpon tavan piirtää grafiikkaa näytölle (HTML Canvas \cite{mdn_canvas}).
+Koko ohjelmakoodi EppaBasicin takana on kirjoitettu JavaScriptillä,
+joka on ainoa yleisesti selaimissa tuettu ohjelmointikieli \cite{mdn_about_js}.
 
 \subsection{Käyttöliittymä}
+\begin{anfxnote}
 Tässä kerrotaan käyttöliittymän rakenteesta.
 Pääasiassa kerrotaan, että on toteutettu html:llä sekä javascriptillä.
 Lisäksi kerrotaan kirjautumismahdollisuudesta sekä
 sen tuomista eduista (tallentaminen, jakaminen).
+\end{anfxnote}
+
 	
 \subsection{Kääntäjä}
+\begin{anfxnote}
 Kääntäjään todellisesta toteutuksesta olisi tarkoitus kertoa tässä.
+\end{anfxnote}
 
 \subsection{Ajoympäristö}
+\begin{anfxnote}
 Tässä on tarkoitus kertoa uudesta ajoympäristöstä.
 Toimii webworkereilla taustasäikeessä.
 Suoritusta katkotaan kaksisuuntaisen liikenteen sallimiseksi.
 Toiseen suuntaa kulkee grafiikkakomennot ja toiseen suuntaan
 käyttäjän syötteet sekä joskus myöhemmin mahdollisesti
 myös debug-komennot.
+\end{anfxnote}
