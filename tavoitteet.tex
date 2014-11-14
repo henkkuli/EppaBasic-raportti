@@ -23,6 +23,24 @@ niiden asentaminen tai oppiminen on hankalaa,
 tai niillä grafiikan tekeminen on työlästä.
 Tämän takia päädyimme uuden kielen tekemiseen.
 
+\subsection{Teknisiä vaatimuksia}
+Kieltä suunnitellessamme päädyimme nopeasti Basic-tyyppisiin kieliin,
+sillä niissä koodilohkojen alkujen ja loppujen merkitsemiseen käytetään englanninkielisiä sanoja
+toisin kuin esimerkiksi C-pohjaisissa kielissä (C++, Java, JavaScript),
+joissa vastaaviin tarkoituksiin käytetään aaltosulkuja.
+Lisäksi monet muutkin asiat,
+kuten esimerkiksi muuttujien tyyppien valitseminen,
+tapahtuu käyttäen englanninkielisiä sanoja erilaisten lyhennysmerkintöjen sijaan.
+Vaikka pidempien ilmaisujen kirjoittaminen onkin lyhyitä hitaampaa,
+päätimme, että aloittelijoille selkeys on tärkeintä.
+
+Välttääksemme monien kielien heikosta tyypityksestä johtuvat ongelmat
+-- kuten luvun sisältämän merkkijonon ja luvun yhteenlasku tuottaa PHP-kielessä luvun \fxnote{Selvempi esimerkki} --,
+päätimme, että kielessä on oltava vahva tyypitys.
+Näin kääntäjä voi jo käännöksen aikana varoittaa edellä mainitun kaltaisista tapauksista,
+jotka saattavat aiheuttaa vakaviakin bugeja ja
+joiden löytäminen koodista saattaa olla todella hankalaa kokeneellekin ohjelmoijalle.
+
 \begin{comment}
 Usein uutta ohjelmointikieltä käyttöönottaessani
 minulla kuluu enemmän aikaa ohjelmointiympäristön asentamiseen
@@ -30,7 +48,7 @@ kuin uuden kielen oppimiseen.
 Vaikka tämä ongelma ei suoranaisesti
 \end{comment}
 
-\begin{anfxnote}
+\begin{anfxnote}{}
 Tänne on tarkoitus listata projektin tavoitteita.
 \\
 Miksi uusi ohjelmointikieli?

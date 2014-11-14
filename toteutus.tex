@@ -14,7 +14,7 @@ Koko ohjelmakoodi EppaBasicin takana on kirjoitettu JavaScriptillä,
 joka on ainoa yleisesti selaimissa tuettu ohjelmointikieli \cite{mdn_about_js}.
 
 \subsection{Käyttöliittymä}
-\begin{anfxnote}
+\begin{anfxnote}{}
 Tässä kerrotaan käyttöliittymän rakenteesta.
 Pääasiassa kerrotaan, että on toteutettu html:llä sekä javascriptillä.
 Lisäksi kerrotaan kirjautumismahdollisuudesta sekä
@@ -22,13 +22,13 @@ sen tuomista eduista (tallentaminen, jakaminen).
 \end{anfxnote}
 
 EppaBasicin käyttöliittymä on toteutettu kokonaan käyttäen HTMLää sekä JavaScriptiä.
-Näin on saatu aikaa kaikissa moderneissa selaimissa toimiva yhtenäinen käyuttöliittymä.
+Näin on saatu aikaa kaikissa moderneissa selaimissa toimiva yhtenäinen käyttöliittymä.
 
 EppaBasicin käyttöliittymä sisältää kaikki ohjelmoinnin kannalta tarvittavat toiminnallisuudet:
 Yläpalkista löytyy ohjelman suorittamiseen tarvittava "Käynnistä"-näppäin,
 tiedostojen hallintaan tarvittavat ''Uusi''-, ''Lataa''- ja ''Tallenna''-näppäimet,
 koodin jakamiseen käytettävä ''Jaa koodi''-näppäin,
-kielen valinta
+käyttöliittymän kielen valinta
 sekä kirjautumiseen tarvittavat kentät.
 Lisäksi käyttöliittymästä löytyy vasemmalta puolelta suuri värittävä koodimuokkain
 sekä oikealta puolelta löytyy sivuston uutiset sekä käyttöohje.
@@ -47,15 +47,24 @@ sekä omien syntaksiväritysten luomisen.
 Syntaksiväritys värittää avainsanat omilla väreillään,
 mikä selkeyttää koodin lukemista.
 
+Lisäksi Ace mahdollistaa yhdessä kääntäjän kanssa käyttäjän tekemien virheiden näyttämisen jo kirjoittamisen aikana.
+Näin käyttäjä saa välitöntä palautetta valitsemallaan omalla äidinkielellään koodissa olevista virheistä ilman,
+että tarvitsee ensin suorittaa koodia.
+Tämä parantaa ohjelmoijan työskentelyn sujuvuutta.
 
+Teknisesti edellä mainittu ominaisuus on toteutettu siten,
+että aina muokkaimen tekstin muuttuessa suoritetaan kääntäjän front-end,
+joka tunnistaa kaikki syntaksi- ja tyyppivirheet.
+Testikääntäminen suoritetaan mahdollisuuksien mukaan taustasäikeessä (Web Worker \cite{w3c_web_worker}).
+Näin virheiden tarkistaminen ei hidasta koodin kirjoittamista.
 
 \subsection{Kääntäjä}
-\begin{anfxnote}
+\begin{anfxnote}{}
 Kääntäjään todellisesta toteutuksesta olisi tarkoitus kertoa tässä.
 \end{anfxnote}
 
 \subsection{Ajoympäristö}
-\begin{anfxnote}
+\begin{anfxnote}{}
 Tässä on tarkoitus kertoa uudesta ajoympäristöstä.
 Toimii webworkereilla taustasäikeessä.
 Suoritusta katkotaan kaksisuuntaisen liikenteen sallimiseksi.
@@ -65,7 +74,7 @@ myös debug-komennot.
 \end{anfxnote}
 
 \subsection{Kieli}
-\begin{anfxnote}
+\begin{anfxnote}{}
 Tässä kerrotaan kielen ominaisuuksista
 sekä sen vahvoista puolista.
 \end{anfxnote}
