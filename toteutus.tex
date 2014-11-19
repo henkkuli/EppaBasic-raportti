@@ -9,7 +9,7 @@ Näin ohjelmointikielemme käyttäminen onnistuu niin Windows-, Linux- ja OS X -
 kuin myös monilla mobiililaitteilla.
 Lisäksi modernit selaimet tarjoavat monia hyödyllisiä ominaisuuksia
 kuten yksinkertaisen tavan toteuttaa käyttöliittymiä (HTML \cite{w3c_html})
-sekä helpon tavan piirtää grafiikkaa näytölle (HTML Canvas \cite{mdn_canvas}).
+sekä helpon tavan piirtää grafiikkaa näytölle (\eng{HTML Canvas} \cite{mdn_canvas}).
 Koko ohjelmakoodi EppaBasicin takana on kirjoitettu JavaScriptillä,
 joka on ainoa yleisesti selaimissa tuettu ohjelmointikieli \cite{mdn_about_js}.
 
@@ -55,7 +55,7 @@ Tämä parantaa ohjelmoijan työskentelyn sujuvuutta.
 Teknisesti edellä mainittu ominaisuus on toteutettu siten,
 että aina muokkaimen tekstin muuttuessa suoritetaan kääntäjän front-end,
 joka tunnistaa kaikki syntaksi- ja tyyppivirheet.
-Testikääntäminen suoritetaan mahdollisuuksien mukaan taustasäikeessä (Web Worker \cite{w3c_web_worker}).
+Testikääntäminen suoritetaan mahdollisuuksien mukaan taustasäikeessä (\eng{Web Worker} \cite{w3c_web_worker}).
 Näin virheiden tarkistaminen ei hidasta koodin kirjoittamista.
 
 \subsection{Kääntäjä}
@@ -84,7 +84,7 @@ sekä koodin suorittamisen ajastamisen tarvittavat toiminnot.
 
 Ajoympäristö -- kuten koko käyttöliittymä muutenkin --
 on totteutettu käyttäen JavaScriptiä.
-Grafiikan piirtämiseen ajoympäristö käyttää HTML5 Canvas -elementtiä,
+Grafiikan piirtämiseen ajoympäristö käyttää \eng{HTML5 Canvas} -elementtiä,
 joka on nykyään tuettu kaikissa moderneissa selaimissa
 \cite{caniuse_canvas}.
 Canvas mahdollistaa yksinkertaisten geometristen muotojen piirtämisen tehokkaasti,
@@ -97,8 +97,8 @@ Sisäistä tilaa käytetään piirtokomentojen yhteydessä määrittämään
 piirtokomennon tarkka toiminta.
 
 Suurin osa matematiikka-, merkkijono sekä ajanhallintafunktiosta on toteutettu käytännössä
-käärimällä JavaScriptin tarjoamat funktiot EppaBasicin tarvitsemaan muotoon.
-Ne funktiot, joita JavaScript ei suoraan tarjoa, on toteutettu
+käärimällä \eng{JavaScriptin} tarjoamat funktiot EppaBasicin tarvitsemaan muotoon.
+Ne funktiot, joita \eng{JavaScript} ei suoraan tarjoa, on toteutettu
 joko käyttämällä kolmannen osapuolen tarjoaamaa kirjastoa
 tai yksinkertaisissa tapauksissa kirjoittamalla itse.
 
