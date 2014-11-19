@@ -79,8 +79,28 @@ ajoympäristön.
 Ajoympäristö pyytää käynnistyessään käyttöliittymältä kääntäjän kääntämää koodia,
 minkä jälkeen ajoympäristö suorittaa koodin.
 Ajoympäristö tarjoaa kaikille ohjelmille yhteiset toiminnot,
-kuten piirto- sekä matematiikkafunktiot sekä koodin suorittamisen ajastamisen.
+kuten piirto-, merkkijono- ja matematiikkafunktiot
+sekä koodin suorittamisen ajastamisen tarvittavat toiminnot.
 
+Ajoympäristö -- kuten koko käyttöliittymä muutenkin --
+on totteutettu käyttäen JavaScriptiä.
+Grafiikan piirtämiseen ajoympäristö käyttää HTML5 Canvas -elementtiä,
+joka on nykyään tuettu kaikissa moderneissa selaimissa
+\cite{caniuse_canvas}.
+Canvas mahdollistaa yksinkertaisten geometristen muotojen piirtämisen tehokkaasti,
+mutta myös kuvien käyttäminen on mahdollista.
+
+Ajoympäristöllä on sisäinen tila,
+joka sisältää esimerkiksi nykyisen piirtovärin.
+Sisäistä tilaa voi muuttaa EppaBasicin sisäisillä komennoilla.
+Sisäistä tilaa käytetään piirtokomentojen yhteydessä määrittämään
+piirtokomennon tarkka toiminta.
+
+Suurin osa matematiikka-, merkkijono sekä ajanhallintafunktiosta on toteutettu käytännössä
+käärimällä JavaScriptin tarjoamat funktiot EppaBasicin tarvitsemaan muotoon.
+Ne funktiot, joita JavaScript ei suoraan tarjoa, on toteutettu
+joko käyttämällä kolmannen osapuolen tarjoaamaa kirjastoa
+tai yksinkertaisissa tapauksissa kirjoittamalla itse.
 
 \subsection{Kieli}
 \begin{anfxnote}{}
