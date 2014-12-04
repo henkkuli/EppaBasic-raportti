@@ -84,23 +84,61 @@ sekä koodin suorittamisen ajastamisen tarvittavat toiminnot.
 
 Ajoympäristö -- kuten koko käyttöliittymä muutenkin --
 on totteutettu käyttäen JavaScriptiä.
-Grafiikan piirtämiseen ajoympäristö käyttää \eng{HTML5 Canvas} -elementtiä,
+Ajoympäristö koostuu kahdesta osasta:
+piirtäjästä ja työskentelijästä.
+Piirtäjä on tavallinen \eng{JavaScript}-ohjelma,
+joka huolehtii näytön piirtämisestä sekä käyttäjän syötteiden lukemisesta.
+Ohjelman suorituksen käynnistyessä piirtäjä alustaa myös työskentelijän,
+joka pyörii omassa säikeessään käyttäen \eng{Web Worker}ia.
+Näin saadaan ohjelman suoritus eristettyä irralleen selaimen toiminnasta,
+jolloin ohjelman suorituksen kestäessä kauan selain pysyy toimintakunnossa.
+
+Piirtäjä ja työskentelijä keskustelevat keskenään käyttäen viestejä.
+Viestit voivat olla yksinkertaisia \eng{JavaScript}-merkkijonoja,
+-objekteja, -taulukoita ja -lukuja sekä näiden yhdistelmiä.
+Viestit kopioituvat lähettäessä, joten arvojen muuttaminen
+piirtäjässä ei vaikuta työskentelijän vastaanottamaana arvoon.
+Viestejä voi lähettää missä tahansa kohtaa suoritettavaa
+\eng{JavaScript}-koodia, mutta niiden lukemiseksi
+suoritus on katkaistava.
+Tämä ominaisuus on syynä kääntäjän tavallista monimutkaisempaan rakenteeseen.
+
+\subsubsection{Piirtäjä}
+Piirtäjä käyttää grafiikan piirtämiseen \eng{HTML5 Canvas} -elementtiä,
 joka on nykyään tuettu kaikissa moderneissa selaimissa
 \cite{caniuse_canvas}.
 Canvas mahdollistaa yksinkertaisten geometristen muotojen piirtämisen tehokkaasti,
 mutta myös kuvien käyttäminen on mahdollista.
+Käyttäjän syötteen (näppäimistö ja hiiri) lukemiseksi
+ohjelma kuuntelee ajoympäristön kaikkia näppäin- ja hiiritapahtumia (\eng{Events}).
+Tapahtuman sattuessa piirtäjä lähettää muutoksen työskentelijälle,
+joka päivittää omaa tilaansa.
+Piirtäjä piirtää näytön työskentelijältä saamiensa ohjeiden mukaan.
 
-Ajoympäristöllä on sisäinen tila,
-joka sisältää esimerkiksi nykyisen piirtovärin.
-Sisäistä tilaa voi muuttaa EppaBasicin sisäisillä komennoilla.
-Sisäistä tilaa käytetään piirtokomentojen yhteydessä määrittämään
-piirtokomennon tarkka toiminta.
+\subsubsection{Työskentelijä}
+Työskentelijällä on sisäinen tila,
+joka sisältää esimerkiksi nykyisen piirtovärin
+sekä näppäimistön pohjassa olevat painikkeet.
+Sisäinen tila voi muuttua kahdella tavalla:
+joko EppaBasic-koodissa kutsutaan komentoa,
+joka muuttaa sisäistä tilaa (esimerkiksi piirtovärin asettaminen),
+tai piirtäjä lähettää komennon,
+joka muuttaa sisäistä tilaa (esimerkiksi hiiren sijainti).
+Sisäinen tila vaikuttaa joidenkin EppaBasicin komentojen palauttamiin arvoihin
+(esimerkiksi \eb{KeyDown} ja \eb{MouseX})
+sekä piirtokomentojen yhteydessä määrittämään
+piirtokomennon tarkka toiminta (esimerkiksi viivan paksuus tai väri).
 
 Suurin osa matematiikka-, merkkijono sekä ajanhallintafunktiosta on toteutettu käytännössä
 käärimällä \eng{JavaScriptin} tarjoamat funktiot EppaBasicin tarvitsemaan muotoon.
 Ne funktiot, joita \eng{JavaScript} ei suoraan tarjoa, on toteutettu
 joko käyttämällä kolmannen osapuolen tarjoaamaa kirjastoa
 tai yksinkertaisissa tapauksissa kirjoittamalla itse.
+
+Grafiikkafunktiot on toteutettu siten, että ne kerätään sisäiseen piirtojonoon.
+Kutsuttaessa \eb{DrawScreen}-komentoa piirtojono lähetetään piirtäjälle.
+Näin saadaan varmistettua, että piirtäjä piirtää kaiken kerrallaan
+eikä piirroksen osia ilmesty ruudulle sattumanvaraisesti.
 
 \subsection{Kieli}
 \begin{anfxnote}{}
