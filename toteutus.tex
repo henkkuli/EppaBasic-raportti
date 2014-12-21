@@ -63,6 +63,56 @@ Näin virheiden tarkistaminen ei hidasta koodin kirjoittamista.
 Kääntäjään todellisesta toteutuksesta olisi tarkoitus kertoa tässä.
 \end{anfxnote}
 
+EppaBasicin kääntäjä on toteutettu kokonaan \eng{JavaScripti}ä käyttäen.
+Näin käyttäjän ei tarvitse asentaa ylimääräisiä liitännäisiä selaimeen
+ja kääntäjä integroituu helposti käyttöliittymään.
+
+EppaBasicin kääntäjä koostuu kahdesta osasta: \eng{Front-end}istä ja \eng{Back-end}istä.
+\eng{Front-end} tulkitsee ohjelmakoodin syntaksin ja muuttaa sen kääntäjän sisäiseen muotoon.
+Samalla se tarkistaa koodin oikeaoppisuuden mukaan lukien tyyppien sopivuus,
+ja on ainoa kääntäjän osa, joka voi kertoa käyttäjälle virheistä.
+\eng{Back-end} kääntää ohjelmakoodin \eng{asm.js}-yhteensopivaksi \eng{JavaScript}-koodiksi,
+joka suoritetaan ajoympäristössä.
+
+\subsubsection{Front-end}
+EppaBasicin \eng{Front-end} koostuu kolmesta osasta:
+skannaajasta (eng. \eng{Lexer}), jäsentäjästä (eng. \eng{Parser}) ja tyyppientarkistajasta.
+
+Skannaaja lukee lähdekoodia alusta loppuun ja jakaa sen merkityksellisiin osiin, tokeneihin (eng. \eng{Token}).
+Tokeneita ovat erilaiset kielen
+avainsanat ($If$, $Then$, $EndIf$, jne.),
+luvut ($15$, $-30$, jne.),
+merkkijonot ($''HelloWorld''$, $''Teksti\ddot{a}''$, jne.),
+muuttujien ja funktioiden nimet ($Print$, $x$, jne.),
+kommentit ($' Kommentit alkavat heittomerkill\ddot{a}$, jne.),
+erikoismerkit ($+$, $-$, $\wedge$, jne.) sekä
+rivinvaihdot ja tyhjät merkit.
+Jos skannaaja löytää pätkän koodia, jota se ei voi jakaa kuuluvaksi edellä mainuttuihin ryhmiin,
+skannaaja kertoo käyttäjälle virheestä.
+\fxnote{Skannaaja muodostaa lähdekoodista token-virran.}
+
+Jäsentäjä on lukee skannaajalta saamansa token-virran ja muodostaa sen pohjalta kuvan ohjelmakoodista.
+EppaBasicin jäsentäjä on tyypiltään \emph{käsinkirjoitettu, rekursiivin, ylhäältä-alas-jäsentäjä}
+(eng. \emph{hand-coded, recursive-descent, top-down parser} \cite[kappale 3.3.2]{eac2e}).
+EppaBasic käytttää käsinkirjoitettua rekursiivista jäsentäjää,
+koska se on yksinkertainen, helposti ymmärrettävä sekä tehokas.
+Lisäksi ominaisuuksien lisääminen jäsentäjään on helppoa.
+
+Jäsentäjä lukee token-virrasta seuraavan tokenin ja kutsuu sen perusteella
+oikeaa funktiota rekursiivisesti.
+Palatessaa funktiot palauttavat muodostamansa \fxnote{alipuun}.
+Jos jäsentäjä kohtaa odottamattoman merkin, se kertoo virheestä käyttäjälle.
+
+Tyyppientarkastaja käy rekursiivisesti läpi jäsentäjän luoman syntaksipuun
+ja pitää kirjaa jokaisessa kohdassa näkyvistä muuttujista ja niiden tyypeistä.
+Näin tyyppientarkastaja voi päätellä jokaiselle lausekkeelle tyypin
+ja funktioiden paluuarvojen tyypit.
+Samalla tyyppientarkastaja selvittää mihin määritykseen jokainen muuttujan käyttö viittaa
+ja mihin funktiomääritykseen jokainen funktiokutsu viittaa.
+
+\subsubsection{Back-end}
+\fixme{Kirjoita backendistä}
+
 \subsection{Ajoympäristö}
 \begin{anfxnote}{}
 Tässä on tarkoitus kertoa uudesta ajoympäristöstä.
