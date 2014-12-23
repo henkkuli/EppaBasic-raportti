@@ -34,6 +34,39 @@ vähentäminen on tärkeää sulautetuissa järjestelmissä.
 Optimoinnit...
 
 \subsection{Back-end}
+\eng{Back-end} on kääntämisen viimeinen vaihe.
+Sen tehtävä on muutta ohjelmakoodi lopulliseen muotoonsta,
+jota ajamiseen käytetty ympäristö ymmärtää.
+Ajoympäristö on usein joko suoraan rautatason laite
+tai virtuaalikone, joka ajon aikana muuttaa koodin raudan ymmärtämään muotoon
+tai vaihtoehtoisesti tulkitsee koodia.
+\eng{Bakc-end} on periaatteessa kääntämisen ainoa vaihe,
+joka välittää käännöksen kohteen arkkitehtuurista,
+tosin joskus myös viimeiset välivaiheen vaiheet riippuvat kohdearkkitehtuurista.
+
 \subsection{Syntaksi}
+Syntaksi tarkoittaa kielen kielioppia.
+Ohjelmoidessa sen on tarkoitus olla täysin yksiselitteinen,
+jottei kääntäjän tarvitse arvuutella,
+mitä ohjelmoija haluaa ohjelman tekevän.
+Syntaksi esimerkiksi määrittelee,
+että $If$-sanaa on seurattava $Boolean$-tyypiksi evaluoituva lauseke
+tai mitkä nimet ovat sallittuja muuttujannimiä.
+
 \subsection{Lähdekoodi}
+Lähdekoodi on käyttäjän kirjoittama kuvaus ohjelman toiminnasta.
+Kääntäjä muuttaa lähdekoodin kohdekoodiksi,
+jota tietokone, virtuaalikone tai tulkki suorittaa.
+Lähdekoodi on usein ihmisen helposti ymmärrettävissä
+sekä sisältää monia ymmärtämistä helpottavia abstraktioita,
+kuten esimerkiksi muuttujat ja komentorakenteet.
+
 \subsection{Ohjelmointikieli}
+Ohjelmointikieli on syntaksin määrittämä kokonnaisuus.
+Ohjelmointikielet voidaan luonnollisten kielien
+(suomi, ruotsi, yms.)
+tavoin jakaa kielisukuihin,
+usein suvun ensimmäisen kielen mukaan.
+Ohjelmointikielisukuja ovat esimerkiksi
+C-pohjaiset ja
+Basic-kielet.
