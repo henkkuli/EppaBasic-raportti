@@ -69,7 +69,7 @@ ja kääntäjä integroituu helposti käyttöliittymään.
 
 EppaBasicin kääntäjä koostuu kahdesta osasta: \eng{Front-end}istä ja \eng{Back-end}istä.
 \eng{Front-end} tulkitsee ohjelmakoodin syntaksin ja muuttaa sen kääntäjän sisäiseen muotoon.
-Samalla se tarkistaa koodin oikeaoppisuuden mukaan lukien tyyppien sopivuus,
+Samalla se tarkistaa koodin oikeaoppisuuden mukaan lukien tyyppien sopivuuden,
 ja on ainoa kääntäjän osa, joka voi kertoa käyttäjälle virheistä.
 \eng{Back-end} kääntää ohjelmakoodin \eng{asm.js}-yhteensopivaksi \eng{JavaScript}-koodiksi,
 joka suoritetaan ajoympäristössä.
@@ -111,7 +111,31 @@ Samalla tyyppientarkastaja selvittää mihin määritykseen jokainen muuttujan k
 ja mihin funktiomääritykseen jokainen funktiokutsu viittaa.
 
 \subsubsection{Back-end}
-\fixme{Kirjoita backendistä}
+EppaBasicin \eng{Back-end} käy rekursiivisesti läpi
+\eng{Front-end}in luoman syntaksipuun.
+Se, että kielen syntaksi sallii ruudun piirtämisen missä tahansa vaiheessa
+monimutkaistaa back-endin toimintaa,
+sillä ruutua piirtäessä ajoympäristön on pysäytettävä koodin suorittaminen
+ruudun päivittymistä ja käyttäjän syötteen lukemista varten,
+minkä jälkeen ohjelman on voitava jatkua pysäytyskohdasta.
+Tätä varten \eng{Back-end}issä on \emph{atomicchecker}-niminen komponentti,
+joka rekursiivisesti merkitsee jokaiselle syntaksipuun solmulle atomisuuden.
+Jokainen solmu puussa on oletuksena atominen poislukien ruudunpäivitysfunktiota kutsuvat solmut,
+jotka ovat epäatomisia.
+Epäatomisuus periytyy puussa aina vanhemmalle funktiokutsujen yli,
+joten tarpeeksi monen iteraation jälkeen puun
+jokaiselle solmulle on merkitty atomisuus.
+
+\eng{Back-end} käyttää atomisuutta optimoimaan kääntämistä,
+sillä atomisen solmun suorittamista ei voida katkaista keskeltä
+ja siten siihen ei myöskään tarvitse voida palata.
+Näin kääntäjä voi optimoida kääntämistä
+ja pitää atomisissa osissa käytettävät muuttujat rekistereissä muistin sijasta.
+
+Varsinainen kääntäminen tapahtuu käymällä rekursiivisesti syntakispuuta lävitse
+ja valitsemalla atomisuuden mukaan oikean tavan kääntää jokainen solmu.
+Atomisissa solmuissa kaikki mahdollinen tallennetaan rekistereihin
+kun taas epäatomisissa solmuissa käytetään muistia muuttujien arvojen tallentamiseen.
 
 \subsection{Ajoympäristö}
 \begin{anfxnote}{}
