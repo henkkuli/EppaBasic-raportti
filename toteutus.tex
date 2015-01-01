@@ -86,7 +86,7 @@ merkkijonot ($''HelloWorld''$, $''Teksti\ddot{a}''$, jne.),
 muuttujien ja funktioiden nimet ($Print$, $x$, jne.),
 kommentit ($' Kommentit alkavat heittomerkill\ddot{a}$, jne.),
 erikoismerkit ($+$, $-$, $\wedge$, jne.) sekä
-rivinvaihdot ja tyhjät merkit.
+rivinvaihdot ja välilyöntimerkit.
 Jos skannaaja löytää pätkän koodia, jota se ei voi jakaa kuuluvaksi edellä mainuttuihin ryhmiin,
 skannaaja kertoo käyttäjälle virheestä.
 \fxnote{Skannaaja muodostaa lähdekoodista token-virran.}
@@ -148,7 +148,7 @@ myös debug-komennot.
 \end{anfxnote}
 
 Kun käyttäjä painaa käyttöliittymän ''käynnistä''-nappia,
-käyttöliittymä avaa käännöksen jälkeen selaimeen uusi ikkuna,
+käyttöliittymä avaa käännöksen jälkeen selaimeen uuden ikkunan,
 ajoympäristön.
 Ajoympäristö pyytää käynnistyessään käyttöliittymältä kääntäjän kääntämää koodia,
 minkä jälkeen ajoympäristö suorittaa koodin.
@@ -165,7 +165,8 @@ joka huolehtii näytön piirtämisestä sekä käyttäjän syötteiden lukemises
 Ohjelman suorituksen käynnistyessä piirtäjä alustaa myös työskentelijän,
 joka pyörii omassa säikeessään käyttäen \eng{Web Worker}ia.
 Näin saadaan ohjelman suoritus eristettyä irralleen selaimen toiminnasta,
-jolloin ohjelman suorituksen kestäessä kauan selain pysyy toimintakunnossa.
+jolloin ohjelman suorituksen kestäessä
+selain ei jäädy.
 
 Piirtäjä ja työskentelijä keskustelevat keskenään käyttäen viestejä.
 Viestit voivat olla yksinkertaisia \eng{JavaScript}-merkkijonoja,
@@ -184,7 +185,7 @@ joka on nykyään tuettu kaikissa moderneissa selaimissa
 Canvas mahdollistaa yksinkertaisten geometristen muotojen piirtämisen tehokkaasti,
 mutta myös kuvien käyttäminen on mahdollista.
 Käyttäjän syötteen (näppäimistö ja hiiri) lukemiseksi
-ohjelma kuuntelee ajoympäristön kaikkia näppäin- ja hiiritapahtumia (\eng{Events}).
+ohjelma kuuntelee ajoympäristön kaikkia näppäin- ja hiiritapahtumia (eng. \eng{Events}).
 Tapahtuman sattuessa piirtäjä lähettää muutoksen työskentelijälle,
 joka päivittää omaa tilaansa.
 Piirtäjä piirtää näytön työskentelijältä saamiensa ohjeiden mukaan.
