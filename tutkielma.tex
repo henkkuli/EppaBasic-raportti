@@ -1,19 +1,20 @@
 \documentclass[12pt,a4paper,finnish]{article}
 
 % Jotain paketteja...
-\usepackage[american,finnish]{babel}
+\usepackage[finnish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{url}
 \usepackage[nomargin,inline,marginclue,draft]{fixme}
 \usepackage{comment}
+\usepackage{graphicx}
 
 % Tyylejä
 \setlength{\parindent}{0mm}
 \setlength{\parskip}{3mm plus0.5mm minus0.5mm}
 
 % Kieliä
-\newcommand\eng[1]{\foreignlanguage{american}{#1}}
+\newcommand\eng[1]{#1}
 \newcommand\eb[1]{\texttt{#1}}
 
 % Otsikko tähän
@@ -41,12 +42,16 @@
 	\setcounter{page}{1}
 	
 	\input{johdanto}
-	\input{teoriaa}
 	\input{aikaisempaa}
-	\input{tavoitteet}	
+	\input{ymparisto}
 	\input{toteutus}
-	\input{tulevaisuus}
-	\input{johtopaatokset}
+	\input{yhteenveto}
 	\input{lahteet}
+		
+	
+	%\input{tavoitteet}		% Toteutukseen
+	%\input{teoriaa}		% -||-
+	%\input{tulevaisuus}	% Yhteenvetoon
+	%\input{johtopaatokset}	% -||-
 	
 \end{document}
