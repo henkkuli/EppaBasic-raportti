@@ -3,6 +3,149 @@
 \section{Tekninen toteutus}
 \fxnote{Miten toteutettu?}
 
+Tässä luvussa kerron mahdollisimman tarkasti,
+miten EppaBasic on toteutettu.
+Luvun lukeminen vaatia hieman esitietoja,
+mutta pyrin selittämään asiat mahdollisimman selkeästi.
+
+Jotta EppaBasic toimisi mahdollisimman monella
+tietokonejärjestelmällä laitteistosta ja
+käyttöjärjestelmästä riippumatta,
+päätimme toteuttaa kaiken ohjelmointi-
+ja suoritusympäristöä myöten
+selainpohjaisesti.
+Näin EppaBasicin käyttäminen toimii niin
+Windows-, Linux- ja OS X -koneilla
+kuin myös monilla mobiililaitteilla.
+Lisäksi modernit selaimet tarjoavat
+monia hyödyllisiä ominaisuuksia
+kuten yksinkertaisen tavan toteuttaa
+käyttöliittymiä (HTML \cite{w3c_html})
+sekä tehokkaan tavan piirtää grafiikkaa
+näytölle (HTML Canvas \cite{mdn_canvas}).
+Koko ohjelmakoodi EppaBasicin takana
+on kirjoitettu JavaScriptillä,
+joka on ainoa yleisesti selaimissa
+tuettu ohjelmointikieli \cite{mdn_about_js}.
+
+JavaScript-koodi EppaBasicin takana
+on jaettu moduuleihin koodin
+rakenteen selkeyttämiseksi.
+Moduulien lataamiseen käytettään
+RequireJS-kirjastoa \cite{requirejs}.
+Moduulien käyttämällä koodista saadaan
+selkeämpää kuin ilman moduuleja,
+koska moduulien riippuvuudet ovat
+näkyvissä moduulin määrittelyssä.
+RequireJS mahdollistaa myös kooditiedostojen
+yhdistämisen ja minifioimisen ennen selaimelle
+lähettämistä käyttäen r.js-ohjelmaa \cite{r.js}.
+
+
+\subsection{Kääntäjä}
+
+
+\subsection{Käyttöliittymä}
+EppaBasicin käyttöliittymä on toteutettu
+kokonaan käytten HTML5:n tarjoamia elementtejä.
+Käyttöliittymän elementtien tyylit ja asettelu
+on määritelty käyttämällä CSS3:a ja
+toiminallisuus on toteutettu
+JavaScriptillä.
+
+EppaBasicin käyttöliittymää ohjaava JavaScript-koodi
+on jaettu moduuleihin, joista jokainen vastaa
+tiettyä käyttöliitymän osaa.
+Omat moduulinsa on esimerkiksi kirjautumisruudulla,
+tiedostodialogeilla, käyttöoppaalla ja ilmoituksilla.
+Ohjausmoduulit ovat yhteydessä HTML-näkymään
+jQuery-kirjaston \cite{jquery} avulla,
+mikä yksinkertaistaa ohjainten rakennetta huomattavasti.
+
+Käyttöliittymän palvelimeen yhteydessä olevat
+moduulit käyttävät ajax-pyyntöjä
+(Asynchronous JavaScript + XML).
+Tällaisia moduuleja ovat esimerkiksi
+kirjautumisen hallinta ja tiedostojen tallentaminen.
+Palvelimella pyörivä python-rajapinta varmistaa,
+että pyytäjällä on oikeus pyytämiinsä tietoihin,
+ja palauttaa vastauksen JSON-muodossa.
+
+Käyttöliittymän tarjoama ohjekirja on kirjoitettu
+käyttämen Markdown-merkkausta \cite{markdown}.
+Käyttäjän navigoidessa ohjekirjasivulle
+JavaScript-koodi hakee ajaxin avulla palvelimelta
+oikean ohjekirjasivun Markdown-muodossa,
+joka muutetaan selaimen päässä HTML-muotoon käyttäen
+marked-kirjasto \cite{marked}
+Näin ohjekirja voidaan tarvittaessa myöhemmin
+myös tulostaa ja palvelin rasituu vähemmän
+kuin jos muunnos tehtäisiin palvelimella.
+
+Ohjelmakoodin muokkaamiseen EppaBasicissa käytetään
+Ace-teks\-tin\-muok\-kaus\-kom\-po\-nenttia \cite{ace_about}.
+Komponentti mahdollistaa omien syntaksiväritysten luomisen.
+Syntaksiväritys selkeyttää koodin lukemista,
+sillä avainsanojen erottaminen helpottuu.
+Ace mahdollistaa myös koodin kääntämisen taustalla,
+mitä EppaBasicissa käytetään kertomaan käyttäjälle
+tämän tekemistä virheistä jo koodin kirjoittamisen aikana.
+Teknisesti tämä on toteutettu suorittamalla
+kääntäjän ensivaihe mahdollisuuksien mukaan
+taustasäikeessä Web Workerin \cite{w3c_web_worker} avulla.
+Ensivaihe kertoo käyttöliittymälle löytämistään virheistä,
+jotka käyttöliittymä näyttää käyttäjälle käyttämällä
+Acen huomautuksia (eng. annotations).
+
+
+\subsection{Ajoympäristö}
+EppaBasicin ajoympäristö on erillinen verkkosivu,
+joka tarjoaa kaikille EppaBasicilla kirjoitetuille
+ohjeilmille yhteiset toiminnot, kuten piirto-,
+merkkijon- ja matematiikkafunktiot sekä
+koodin suorittamisen ajastamiseen tarvittavat toiminnot.
+Myös ajoympäristön voi laskea kuuluvaksi käyttöliittymään,
+mutta esittelen sen erillään muusta käyttöliittymästä,
+sillä se tarjoaa käyttöliittymänä vain piirtopinnan
+ja syötteiden lukemisen, mutta ohjelmallisena
+komponenttina rajapinnan ja suoritusalusta kääntäjän
+kääntämien ohjelmien suorittamiselle.
+
+Ajoympäristö aukeaa automaattisesti uuteen selainikkunaan
+käyttäjän suorittaessa ohjelman ja koodin käännyttyä.
+Ajoympäristö pyytää muokkausikkunalta käännetyn kooodin,
+minkä jälkeen ajoympäristö alustaa itsensä ja suorittaa koodin.
+
+Ajoympärstö koostuu kahdesta osasta:
+piirtäjästä ja työskentelijästä.
+Piirtäjä on tavallinen selaimessa pyörivä
+JavaScript-ohjelma, joka huolehtii
+näytön piirtämisestä ja käyttäjän syötteiden lukemisesta.
+Työskentelijä suoritetaan omassa säikeessään
+käyttäen Web Workeria.
+Näin saadaan ohjelman suoritus eristettyä
+irralleen käyttöliittymätoiminnoista.
+Jos näin ei tehtäisi, ohjelman suorituksen
+kestäessä selain ei vastaisi käyttäjän
+syötteisiin ennen suorituksen taukoamista.
+
+Piirtäjä ja työskentelijä keskustelevat
+keskenään käyttäen viestejä.
+Viestit voivat olla yksinkertaisia
+JavaScript-merkkijonoja,
+-objekteja, -taulukoita ja -lukkuja
+sekä näiden yhdistelmiä.
+Viestit kopioituvat lähetettäessä,
+joten arvojen muuttaminen piirtäjässä
+ei vaikuta työskentelijän vastaanottamaan
+arvoon eikä myöskään toisinpäin.
+Viestejä voi lähettää mistä tahansa kohtaa
+suoritettavaa JavaScript-koodia,
+mutta niiden lukemiseksi suoritus on katkaistava.
+Tämä ominaisuus on suurin syy kääntäjän
+tavallista monimutkaisempaan rakenteeseen.
+
+\begin{comment}
 Jotta EppaBasic toimisi mahdollisimman monella tietokoneella käyttöjärjestelmästä riippumatta,
 päätimme toteuttaa kaiken ohjelmointi- ja suoritusympäristöä myöten selainpohjaisesti.
 Näin ohjelmointikielemme käyttäminen onnistuu niin Windows-, Linux- ja OS X -koneilla
@@ -244,3 +387,4 @@ että tietyn tyyppiseen muuttujaan voidaan tallentaa
 vain muuttujan tyypin mukaisia arvoja.
 Näin ei tule vahingossa tilanteita,
 joissa muuttuja sisältääkin jotain muuta kuin pitäisi.
+\end{comment}
