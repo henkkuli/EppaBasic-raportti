@@ -33,17 +33,214 @@ on jaettu moduuleihin koodin
 rakenteen selkeyttämiseksi.
 Moduulien lataamiseen käytettään
 RequireJS-kirjastoa \cite{requirejs}.
-Moduulien käyttämällä koodista saadaan
+Moduulien käyttämällä voi kirjoittaa
 selkeämpää kuin ilman moduuleja,
 koska moduulien riippuvuudet ovat
 näkyvissä moduulin määrittelyssä.
 RequireJS mahdollistaa myös kooditiedostojen
-yhdistämisen ja minifioimisen ennen selaimelle
+yhdistämisen ja pienentämisen ennen selaimelle
 lähettämistä käyttäen r.js-ohjelmaa \cite{r.js}.
+
+EppaBasicin kääntäjä kääntää ohjelmat
+asm.js-koodiksi \cite{asm.js}.
+Asm.js-koodi on tavallista
+JavaScript-koodia, jonka
+ominaisuuksia on rajoitettu siten,
+että jotkin selaimet osaavat
+suorittaa koodia tavallista
+nopeammin.
+Ainakin uusien Mozilla Firefoxin
+ja Google Chromen versioiden
+tiedetään suorittavan
+asm.js-koodia nopeammin
+kuin vastaavaa tavallista
+JavaScript-koodia.
+Asm.js-koodin käyttäminen
+ei kuitenkaan rajoita
+EppaBasicin ominaisuuksia,
+sillä asm.js-koodista
+voidaan kutsua myös
+tavallisia JavaScript-funktioita,
+joissa voidaan toteuttaa
+puuttuvat toiminnallisuudet.
 
 
 \subsection{Kääntäjä}
-Eppa
+EppaBasicin kääntäjä koostuu kahdesta osasta:
+ensivaiheesta (eng. front-end) ja
+loppuvaiheesta (eng. back-end).
+Molemmat vaiheet on jaettu omiin moduuleihinsa,
+minkä lisäksi kääntäjässä on yksi apumoduuli,
+joka mahdollistaa eri kääntäjän vaiheiden
+suorittamisen helposti.
+
+Eräs tapa jakaa kääntäjä osiin on jakaa
+se kolmeen osaan:
+ensivaiheeseen (eng. front-end),
+välivaiheeseen (eng.middleware) ja
+loppuvaiheeseen (eng. back.end).
+EppaBasicissa ei ole erillistä välivaihetta,
+sillä kääntäjä ei vielä tarvitse sellaista.
+Tulevaisuudessa on tarkoitus toteuttaa
+välivaiheeseen muun muassa optimoija,
+joka nopeuttaa koodin suoritusta.
+
+\subsubsection{Ensivaihe}
+Ensivaihe on kääntämisen ensimmäinen vaihe.
+Sen tehtävä on tulkita käyttäjän kirjoittama
+EppaBasic-koodi ja muuttaa se kääntäjän
+sisäiseen muotoon.
+EppaBasicissa ensivaihe on myös ainoa
+vaihe, joka voi kertoa käyttäjälle
+koodissa olevista virheistä.
+
+EppaBasicin kääntäjä käyttää sisäisenä
+esitysmuotonaan abstraktia syntaksipuuta
+(eng. abstract syntax tree, AST).
+Siinä puun juuri vastaa koko ohjelmaa,
+ja jokainen solmu vastaa tiettyä
+syntaksillista osaa.
+Esimerkiksi komentorakenteilla,
+laskuoperaattoreilla ja
+funktiomäärityksillä
+on omat solmunsa, joilla on eri määrä lapsia.
+Puun lehtiä ovat esimerkiksi
+muuttujaviittaukset ja vakiot.
+\fxnote{Tarkista määritelmä eac2e:stä}
+
+EppaBasicin ensivaihe muodostuu
+kolmesa osasta:
+lukijasta (eng. lexer)m
+jäsentäjästä (eng. parser) ja
+tyyppientarkastajasta.
+
+Lukija lukee lähdekoodin alusta loppuun
+ja jakaa sen merkityksellisiin osiin,
+merkkeihin (eng. token),
+Merkkejä ovat erilaiset kielen
+avainsanat ($If$, $Then$, $EndIf$, jne.),
+luvut ($15$, $-30$, jne.),
+merkkijonot ($''HelloWorld''$, $''Teksti\ddot{a}''$, jne.),
+muuttujien ja funktioiden nimet ($Print$, $x$, jne.),
+kommentit ($' Kommentit\ alkavat\ heittomerkill\ddot{a}$, jne.),
+erikoismerkit ($+$, $-$, $\char`\^$, jne.) sekä
+rivinvaihdot ja välilyöntimerkit.
+Jos lukija löytää pätkän koodia,
+jota se ei voi jakaa kuuluvaksi
+edellä mainittuihin ryhmiin,
+lukija kertoo käyttäjälle virheestä.
+
+Jäsentäjä tulkitsee lukijalta saamansa
+merkkivirran ja muodostaa sen pohjalta
+ohjelmakoodin AST-puun.
+EppaBasicin jäsentäjä on tyypiltään
+\emph{käsinkirjoitettu, rekursiivin,
+ylhäältä-alas-jäsentäjä}
+(eng. \emph{hand-coded, recursive-descent,
+top-down parser} \cite[kappale 3.3.2]{eac2e}).
+EppaBasic käyttää tällaista jäsentäjää,
+koska se on yksinkertainen toteuttaa,
+helposti ymmärrettävä ja tehokas.
+Näin ominaisuuksien lisääminen
+kääntäjään on helppoa.
+
+Rekursiivinen ylhäältä-alas-jäsentäjä
+toimii siten, että funktion aluksi
+se lukee seuraavan merkin virrasta,
+minkä perusteella se kutsuu seuraavaa
+funktiota.
+Funktiot palauttavat muodostamansa
+AST-alipuun.
+
+Jäsentämisen jälkeen tyyppientarkastaja
+käy rekursiivisesti läpi jäsentäjän
+luoman AST-puun.
+Se pitää kirjaa jokaisessa kohdassa
+näkyvistä muuttujista ja niiden tyypeistä.
+Näin tyyppientarkastaja voi päätellä
+jokaiselle lausekkeelle tyypin
+ja jopa kutsuttavien funktioiden
+paluuarvojen tyypit.
+Samalla tyyppientarkastaja selvittää,
+mihin määritykseen jokainen muuttujan
+käyttö viittaa ja mihin funktiomääritykseen
+jokainen funktiokutus viittaa.
+
+\subsubsection{Loppuvaihe}
+Loppuvaihe on kääntämisen viimeinen vaihe,
+joa muodostaa sisäisestä esitysmuodosta
+ajettavan ohjelman.
+EppaBasicin loppuvaihe muuttaa ohjelman
+asm.js-yhteensopivaksi \cite{asm.js}
+JavaScript-koodiksi.
+
+EppaBasicin loopuvaihe käy rekursiivisesti
+läpi AST-puun.
+Jokainen AST-puun solmu muutetaan
+vastaavaksi pätkäksi asm.js-koodia.
+
+EppaBasicin loppuvaihetta monimutkaistaa se,
+että EppaBasic mahdollistaa ruudun piirtämisen
+keskellä komentorakenteita.
+JavaScriptissä (ja siten myös asm.js:ssä)
+ruudun päivittäminen ja käyttäjän syötteiden
+lukeminen vaatii sen, että JavaScript-koodin
+suorittaminen loppuu edes hetkeksi.
+JavaScriptissä ei kuitenkaan ole
+mahdollista tallentaa suorituksen tilaa
+komentorakenteessa ja palata siihen.
+Tämän takia kääntäjän loppuvaihe
+joutuu muokkaamaan käännettävää
+koodia siten, että suoritusta
+voidaan näennäisesti jatkaa
+keskeltä komentorakennetta.
+
+Loppuvaihe merkitsee jokaiselle
+AST-puun solmulle atomisuuden
+eli jakamattomuuden.
+Jakamattomuus merkitsee sitä,
+että suoritusta ei tarvitse eikä voi
+katkaista kyseisen solmun sisällä.
+Kaikki solmut ovat aluksi atomisia.
+Sen jälkeen merkitään jokainen
+funktion \eb{DrawScreen} (päivittää ruudun)
+kutsu epäatomiseksi.
+Tämän jälkeen merkitään solmuja
+epäatomisiksi, jos jokin niiden
+lapsista on epäatominen tai
+kutsuttava funktio on epäatominen.
+Näin epäatomisuus peritytyy
+puussa ylöspäin.
+
+Nyt loppuvaihe voi jakaa koodin
+mahdollisimman pitkiin atomisiin osiin.
+Vaihe luo jokaiselle atomiselle osalle oman
+funktionsa ja antaa funktioille indeksin.
+Ohjelman suorituksen aluksi kutsupinossa
+on yksi alkio: ohjelman ensimmäinen
+atominen osa.
+Funktio päivittää suorituksensa
+lopuksi kutsupinoa siten,
+että seuraavaksi kutsuttava
+funktio on päälimmäisenä.
+Nyt ajoympäristö voi kutsua
+pinon päällä olevaa funktiota,
+pitää tauon, jonka aikana
+luetaan syötteet ja tarvittaessa
+päivitetään piirtopinta,
+ja kutsua taas hetken kuluttua
+pinon päälimmäistä funktiota.
+Kun funktiopinossa ei ole
+enää alkioita, ohjelman suoritus
+on päättynyt.
+
+Atomiset osat pitävät vain
+itsensä sisällä tarvittavat
+arvot paikallisissa muuttujissa.
+Muissa osissa mahdollisesti tarvittavat
+arvot tallennetaan muuttujille
+varattuun pinomuistiin
+(huom. eri kuin kutsupino).
 
 
 \subsection{Käyttöliittymä}
