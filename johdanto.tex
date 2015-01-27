@@ -2,101 +2,104 @@
 % Lisäksi täällä kerrotaan myös projektin syntyhistoriasta
 
 \section{Johdanto}
-\begin{comment}
-Tietokoneet ymmärtävät konekieltä.
-Konekieli muodostuu yksinkertaisisista komennoista,
-joiden nopeaan suorittamiseen tietokoneet on suunniteltu.
-Ihmiset ovat kuitenkin huonoja kirjoittamaan konekieltä
-sen alkukantaisten komentojen vuoksi.
-Ihmisiä varten onkin kehitelty erilaisia ohjelmointikieliä,
-jotka sisältävät erilaisia abstraktioita ohjelmoinnin helpottamiseksi.
-
-Muunnos ohjelmointikielestä konekieleen ei kuitenkaan aina ole yksinkertainen.
-Monet ohjelmointikielten abstraktiot voidaan toteuttaa hyvinkin eri tavoin konekielessä,
-sillä eri tietokonearkkitehtuurit sisältävät hyvinkin erilaisia konekielisiä komentoja.
-Lisäksi lyhyistäkin ohjelmakoodinpätkistä voi syntyä pitkiä konekielisiä ohjelmia,
-joten pientenkin ohjelmien muuttaminen konekieleksi voi viedä ohjelmoijalta tunteja.
-
-Tämän prosessin automatisoimiseksi on kehitetty ohjelmia, joita kutsutaan kääntäjiksi.
-Kääntäjä on yksinkertaisesti ohjelma, joka muuttaa koodia muodosta toiseen.
-Usein tämä tarkoittaa ohjelmointikielen muuttamista konekieleksi,
-mutta on myös olemassa kääntäjiä,
-jotka kääntävät ohjelmointikieliä toisikseen.
-Tällaisia kääntäjiä kutsutaan source-to-source-kääntäjiksi.
-\end{comment}
-
 Tässä raportissa kerron toteuttamastani
-ohjelmointikielestä ja kääntäjästä -- EppaBasicista.
-Samalla kerron myös kääntäjien toiminnasta yleisesti.
-
-\fxnote{Mikä on kääntäjä}
-
-%Tässä raportissa kerron kääntäjien toiminnasta yleisesti
-%sekä itse sunnittelemastani ja toteuttamastani %ohjelmointikielestä ja kääntäjästä -- EppaBasicista.
+ohjelmointikielestä, EppaBasicista.
+Esittelen EppaBasicin toimmallisuutta
+sekä kerron, miten kieli sopii
+ohjelmoinnin opettamiseen.
+Lisäksi kerron, miten EppaBasic
+kääntää ohjelman tietokoneen
+ymmärtämään muotoon.
 
 Suomessa on viimeaikoina puhuttanut ohjelmoinnin
-opettaminen peruskouluissa.
+opettaminen peruskouluissa,
+sillä digitalisoituvassa
+yhteiskunnassa ohjelmoinnin
+osaaminen on hyödyllinen taito.
+\cite{hs_kiuru}\cite{hs_eka}.
+Myös tulevassa peruskoulun
+opetussuunnitelmassa (OPS 2016)
+linjataan, että peruskouluissa aletaan
+vuonna 2016 opettaa ohjelmointia
+\cite{OPS_2016}.
+Ohjelmoinnista ei tule omaa oppiainettansa,
+mutta sitä on tarkoitus opettaa muiden
+aineiden osana, aluksi erityisesti
+matematiikan \cite{OPS_2016}\cite{hs_eka}.
+
 Eräs ohjelmoinnin opetusta suunniteltaessa eteen tuleva
 asia on ohjelmointikielen valinta.
+Opetussuunnitelmassa tähän ei
+oteta kantaa \cite{hs_eka}.
 Kielen tulee olla sellainen,
 että sillä saa helposti jotain aikaan,
 mutta sen tulee samalla olla tarpeeksi laaja,
 jotta suurempienkin kokonaisuuksien tekeminen
-oppimisen myötä olisi mielekästä.
+taitojen karttuessa olisi mielekästä.
 Lisäksi kielen rakenteen on tuettava muiden,
 yleisesti käytettyjen kielten hahmottamista.
 
-\fxnote{OPS16,miksi,mihin johtaa,opsissa ei ole päätetty kielestä}
-
-Aikojen saatossa ohjelmoinnnin opettamiseen
-on luotu monia eri kieliä ja menetelmiä.
+Ohjelmoinnnin opettamiseen
+on luotu monia eri kieliä ja menetelmiä
+\cite{language_history}.
 Eräs ensimmäisistä juuri ohjelmoinnin opettamiseen
 suunnitelluista kielistä oli BASIC
-(Beginner's All-purpose Symbolic Instruction Code).
+(Beginner's All-purpose Symbolic Instruction Code)
+\cite{basic}.
 Ensimmäiset Basic-kielet olivat toiminnoiltaan rajoittuneita,
 mutta pian kieleen tuli lisää ominaisuuksia.
 Eräs tunnetuimmista Basic-kielistä on
 Microsoftin kehittämä Visual Basic
-(nykyisin Visual Basic .NET),
+(nykyisin Visual Basic .NET)
+\cite{language_history},
 joka on edelleen laajasti käytössä.
 
-Kehittämäni kieli EppaBasic on suunniteltu
+Kehittämäni kieli EppaBasic
+on Visual Basic .NETin tapaan
+BASIC-pohjainen kieli.
+EppaBasic on suunniteltu
 erityisesti ohjelmoinnin aloittelijoille.
-Kielellä on helppo lukea käyttäjän syötteitä
-ja piirtää grafiikkaa,
-joten yksinkertaisten pelien tekemisen oppii nopeasti.
+Kielellä on helppo lukea
+näppäinten painalluksia
+ja hiiren liikkeitä
+sekä piirtää grafiikkaa,
+joten esimerkiksi yksinkertaisten
+pelien tekemisen oppii nopeasti.
 Pelien tekemisen avulla aloittelijan into pysyy yllä,
 sillä koko ajan saa nähdä työnsä tulokset.
-Kieltä voi kokeilla osoitteessa
+
+EppaBasicia voi kokeilla osoitteessa
 \url{http://eppabasic.fi}.
-Esimerkkikoodeja saa voi kokeilla painamalla
-''Lataa''-nappia, valitsemalla ''esimerkit''
-ja lopuksi halutun esimerkin.
+Kannattaa tutustua esimerkkikoodeihin
+sekä ohjepanelista löytyviin
+ohjeiden esimerkkeihin.
 
 EppaBasic on ollut onnistuneesti käytössä
-Helsingin yliopiston järjestämällä ohjelmointileirillä,
-jossa kielen avulla tutustuttiin erilaisten algoritmien toimintaan.
-Graafisten ominaisuuksiensa ansiosta
-EppaBasicilla voi helposti demonstroida
-esimerkiksi järjestys- ja reitinhakualgoritmien toimintaa.
-Kurssilta saatu palaute oli pääasiassa myönteistä
-ja yli 80\% leiriläisistä suosittelisi kieltä toisille.
-\fxnote{14/17 käyttäisi itse ja 15/17 suosittelisi}
+Helsingin yliopiston elokuussa 2014
+järjestämällä ohjelmointileirillä,
+jossa kielen avulla peruskoulun
+6--9-luokkalaiset
+tutustuivat erilaisten algoritmien toimintaan.
+Leirillä kielen graafisten ominaisuuksien
+avulla havainnollistettiin erilaisten
+algoritmien toimintaa.
+Kurssilta saatu palaute oli pääasiassa myönteistä,
+ja lähes kaikki leirille osallistuneet
+suosittelisivat kieltä ystävilleen.
 
-\fxnote{Milloin?Keille?}
-
-Ohjelmointikielen toteuttamisessa on ollut itseni lisäksi mukana
+Ohjelmointikielen toteuttamisessa on
+ollut itseni lisäksi mukana
 Sami Kalliomäki (opiskelija, Karkkilan lukio),
-joka on suunnitellut ja toteuttanut ohjelmointikielen ympärille tehdyn verkkosivuston
-sekä auttanut muutenkin kielen suunnittelussa,
-sekä Antti Laaksonen (Helsingin yliopisto),
-joka on toiminut vaikuttavana taustavoimana projektin takana.
-Lisäksi haluan kiittää kaikkia \#datatahti (IrcNet)- ja \#eppabasic (IrcNet)-kanavien keskustelijoita,
-jotka ovat alun epäilyistä huolimatta tukeneet projektia.
-
-\fxnote{Laajenna johtantoa: Muista basiceista ja niiden historiasta, koodaus peruskoulussa, eb ollut käytössä leireillä}
-
-%Dart
-%Codeacatemy
-%
-%Kopioi tänne githubista historiaa.
+joka on suunnitellut ja toteuttanut
+ohjelmointikielen ympärille tehdyn verkkosivuston
+sekä auttanut muutenkin kielen suunnittelussa.
+Tämän raportin ohjaajana toiminut
+Antti Laaksonen (Helsingin yliopisto)
+on toiminut myös vaikuttavana
+taustavoimana EppaBasic-projektin takana.
+Haluan kiittää heitä molempia
+projektiin osallistumisesta.
+Lisäksi haluan kiittää kaikkia
+\#datatahti (IrcNet)- ja
+\#eppabasic (IrcNet)-kanavien keskustelijoita,
+jotka ovat tukeneet projektia.
