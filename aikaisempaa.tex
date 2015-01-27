@@ -1,16 +1,6 @@
 % Täällä kerrotaan aikaisemmista, vastaavista projekteista
 
 \section{Aikaisempia opetuskäyttöön suunnattuja järjestelmiä}
-
-\fxnote{
-Basic 1964\\
-Logo 1967\\
-Pascal 1960-1970\\
-C 1972, kulta-aika 1990-luvulla\\
-Java 1995\\
-Scratch 2006
-}
-
 Kautta tietojenkäsittelytieteen
 opettamisen historian ohjelmoinnin
 opettamiseen on kehitelty
@@ -19,38 +9,46 @@ Tässä luvussa esittelen muutamia
 historiallisesti merkittäviä
 ohjelmointikieliä, joita
 on käytetty ohjelmoinnin opettamiseen.
-Lähes kaikki ensimmäisistä
-ohjelmointikielistä olivat
-tekstipohjaisia, eli
-niitä ei ollut suunniteltu
-graafisten ohjelmien,
-kuten pelien, tekmiseen.
 Lisäksi esittelen myös muutamia uusia
-ohjelmointikieliä, jotkai toimivat
+ohjelmointikieliä, jotka toimivat
 EppaBasicin tavoin selainympäristössä.
+
+Ensimmäisillä ohjelmointikielillä
+ei useinkaan voinut tehdä graafisia
+ohjelmia, sillä tietokoneiden
+laitteisto harvoin tuki
+muita kuin tekstipohjaisia
+käyttöliittymiä.
+Moniin näistä kielistä
+on myöhemmin lisätty
+grafiikkatuki laitteiston
+kehittymisen myötä.
 
 Eräs ensimmäisistä ohjelmoinnin
 opettamiseen kehitetyistä
 ohjelmointikielistä oli
 Dartmouth Collegessa vuonna 1964
-kehitetty BASIC.
+kehitetty BASIC \cite{basic}.
 BASIC kehitettiin erityisesti
 opiskelijoille, joilla ei ollut
-matemaattisluonnontieteellistä
-taustaa.
+tietojenkäsittelytieteellistä
+taustaa \cite{language_history}.
 Alkuperäinen BASIC oli hyvin
 rajoittunut, mutta myöhemmät
 murteet ovat tuoneet mukanaan
 kieleen uusia ominaisuuksia.
-Myös EppaBasic on
-tällainen murre.
-Muita merkittäviä BASIC-murteita
-ovat esimerkiksi
+Eräs merkittävimmistä
+BASIC-murteista on
 Microsoftin kehittämä
-Visual Basic ja
+Visual Basic.
+Toisaalta myös suomalaisen
 Jukka Lavosen kehittämä
-CoolBasic, joka on inspiroinut
-myös EppaBasicin kehitystyötä.
+CoolBasic on ollut merkittävä
+EppaBasicin kannalta, sillä
+se on inspiroinut EppaBasicin
+kehitystyötä.
+Myös EppaBasic on
+BASIC-murre.
 
 Ohjelmointikielet, jotka ovat
 toistensa murteita,
@@ -76,7 +74,8 @@ Logo pohjautuu vuonna 1958
 julkaistuun Lisp-ohjelmointikieleen.
 
 Vuonna 1970 Niklaus Wirth
-julkaisi Pascal-ohjelmointikielen.
+julkaisi Pascal-ohjelmointikielen
+\cite{pascal}.
 Kieli suunniteltiin erityisesti
 opetuskäyttöön, ja se yhdisti
 aikansa yleisimpien ohjelmointikielten
@@ -100,26 +99,14 @@ ohjelmointikieli on Massachusetts
 Institute of Technologyn kehittämä
 Scratch-ohjelmointikieli
 (ks. Kuva \ref{img:scratch}).
-Scratch on graafinen ohjelmointikieli,
+Scratch on visuaalinen ohjelmointikieli,
 mikä tarkoittaa sitä, että
 kieltä ohjelmoidaan raahaamalla
 hiirellä komentopalikoita
 ohjelmointialueelle.
-
-OPS 2016 -dokumentissa mainitaan,
-että perukoulun ensimmäisillä
-luokilla on tarkoitus käyttää
-muun muassa graafisia ohjelmointikieliä.
-Myöhemmillä luokilla on tarkoitus
-harjoitella hyviä ohjelmointikäytöntöjä,
-mikä käytännössä tarkoittaa siirtymistä
-tekstuaalisiin ohjelmointikieliin
-eli ohjelmoitikieliin, joita ohjelmoidaan
-kirjoittamalla koodia.
-EppaBasic on yksi mahdollisuus
-yläluokilla käytettäväksi ohjelmointikieleksi,
-mutta käyttö alaluokilla on myös mahdollista.
-\fxnote{Tarkista OPS 2016 ja lisää viite}
+Komentopalikoiden avulla
+voi liikuttaa ja pyörittää
+kuvia.
 
 \begin{figure}[h]
     \centering
@@ -129,44 +116,19 @@ mutta käyttö alaluokilla on myös mahdollista.
 \end{figure}
 
 
-\begin{comment}
-Monia kieliä on käännetty selainympäristöön
-(esim. \eng{Python}, \eng{Lua}) \cite{repl.it}
-Näillä kielillä grafiikan luominen on kuitenkin usein hankalaa.
-Lisäksi useissa toteutuksissa ohjelmien on oltava lyhyitä,
-sillä ohjelman suorittaminen jäädyttää selaimen,
-kunnes ohjelma on suoritettu kokonaisuudessaan.
-\fxnote{Esimerkkejä}
+OPS 2016 -opetussuunnitelman
+toteuttamisessa mukana olleen
+opetusneuvos Leo Pahkinin mukaan
+ala-asteella on tarkoitus tutustua
+visuaalisiin ohjelmointikieliin
+\cite{koodi2016_ops}.
+Yläasteella hänen mukaansa
+on tarkoitus tutustua
+ohjelmointikieliin, joita
+ohjelmoidaan kirjoittamalla koodia.
 
-On myös kehitetty erilaisia ohjelmoinnin aloittelijoille suunnattuja,
-selainympäristössä toimivia ohjelmointikieliä,
-kuten esimerkiksi Massachusetts Institute of Technologyn
-kehittämä Scratch-ohjelmointikieli.
-\fxnote{Tarkista MIT ja Scratch}
-Scratch on graafinen ohjelmointikieli,
-mikä tarkoittaa,
-että sen ohjelmoiminen tapahtuu raahamalla erilaisia komentopalikoita
-peräkkäin ja sisäkkäin.
-Vaikka tämä onkin nopeasti omaksuttava tapa tehdä omia ohjelmia,
-suurien ohjelmien tekeminen on hankalaa,
-samoin kuin siirtyminen myöhemmin muihiin kieliin.
-Scratch on mielestämme liian rajoittunut kieli
-yli kymmenvuotiaille nuorille.
-
-\fxnote{Varmista sivu ja lisää linkki}
-Codeacademy on tarjoaa omaa selaimessa toimivaa ohjelmointiympäristöään.
-Kyseisessä ympäristössä ohjelmoidaan \eng{JavaScript}-kielellä,
-joka muistuttaa läheisesti muita yleisesti käytettyjä kieliä,
-kuten Java ja C++.
-Ympäristössä syötteiden lukeminen ja piirtäminen
-tapahtuu tapahtumien (eng. \eng{Events}) perusteella.
-Mielestämme tapahtumien käyttäminen luo kuitenkin ohjelmakoodiin
-aloittelijoille hankalasti ymmärrettävän suoritusjärjestyksen,
-sillä koodin suoritus hyppii tapahtumien ohjelmarunkojen välillä.
-\fxnote{Parempi sana}
-Tämän takia oma ohjelmointikielemme rakenne ei pohjaudu eventteihin
-vaan ohjelmakoodi suoritetaan aina ohjelmoijan kannalta loogisessa,
-deterministisessä järjestyksessä.
-\end{comment}
-
-\fxnote{Älä hauku! Basiceista, Pascalista, Logosta... muista aloituskielistä}
+EppaBasicin on tarkoitus olla
+yksi mahdollisuus yläluokilla
+käytettäväksi ohjelmointikieleksi.
+Myös käytön alaluokilla on
+mahdollista.
