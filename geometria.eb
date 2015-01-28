@@ -1,0 +1,29 @@
+' Värit määritellään kolmen luvun avulla:
+' Ensimmäinen luku merkitsee punaisen
+' osuutta, toinen vihreän ja kolmas
+' sinisen. Osuudet ovat lukuja väliltä
+' 0 ... 255
+FillColor 255, 0, 0         ' Punainen
+' Piirretään täytetty ympyrä antamalla
+' funktiolle ympyrän keskipisteen
+' koordinaatit sekä säde
+FillCircle 100, 150, 15
+
+DrawColor 0, 255, 0         ' Vihreä
+' Piirretään ontto nelikulmio
+' Ensimmäiset kaksi parametriä kertovat
+' nelikulmion vasemman yläkulman
+' koordinaatit, toiset nelikulmion
+' leveyden ja korkeuden
+DrawRect 90, 120, 30, 200
+
+FillColor 255, 0, 255       ' Liila
+DrawColor 0, 0, 255         ' Sininen
+' Piirretään kolmio, jolla on ääriviivat
+' Kolmio piirretään antamalla kaikkien
+' kolmen kulman koordinaatit
+FillTriangle 250, 20, 300, 15, 200, 400
+DrawTriangle 250, 20, 300, 15, 200, 400
+
+' Lopuksi piirretään kuviot näytölle
+DrawScreen

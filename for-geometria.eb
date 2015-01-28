@@ -1,0 +1,13 @@
+' Tämä ohjelma piirtää kymmenen ympyrää
+' Alustetaan aluksi väri
+FillColor 0, 0, 255         ' Sininen
+
+For i = 1 To 10
+    ' Toistettava koodi alkaa tästä
+    ' i käy läpi arvot 1 ... 10
+    FillCircle 60*i, 200, 27
+    ' Toistettava koodi loppuu tähän
+Next i
+
+' Lopuksi piirretään näyttö
+DrawScreen

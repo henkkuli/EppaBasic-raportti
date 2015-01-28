@@ -16,28 +16,25 @@ sillä moni aloitteleva (ja miksei myös kokenutkin)
 ohjelmoija haluaa nähdä työnsä tulokset.
 Varsinkin aloittelijoille ohjelman aukeaminen
 viime vuosituhannelta tuttuun komentokehotteen
-(ks. Kuva \ref{img:cmd})
 voi olla hyvinkin epätyydyttävää.
 \fxnote{Media computation}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\textwidth]{cmd}
-    \caption{Windowsin komentokehote yksinkertaisen python-ohjelman suorituksen jälkeen}
-    \label{img:cmd}
-\end{figure}
 
 Toinen EppaBasicin tärkeä tavoite on olla
 mahdollisimman helposti käyttöönotettava,
 sillä usein uutta ohjelmointikieltä opetellessa
 kuluu useita tunteja jo pelkän
 ohjelmointiympäristön asentamiseen.
-Tämän ajan voisi käyttää paljon tehokkaammin
-itse kielen opettelemiseen.
-\fxnote{Lannistavaa}
+Tämä voi lannistaa aloittelijan
+ohjelmointihalut jo alkuunsa.
+EppaBasic onkin toteutettu
+selaimessa toimivaksi, joten
+käyttöönottaminen onnistuu
+helposti navigoimalla osoitteeseen
+\url{http://eppabasic.fi}.
 
-Ennen projektin aloittamista mietimme,
-täyttäisikö jokin olemassa oleva kieli jo nämä tavoitteet.
+Ennen projektin aloittamista pohdimme,
+täyttäisikö jokin olemassa oleva
+kieli jo nämä tavoitteet.
 Kuitenkin miettiessämme vaihtoehtoja
 useat kielet olivat joko vanhentuneita,
 niiden asentaminen tai oppiminen on hankalaa,
@@ -54,7 +51,7 @@ kirjoittamiseen käytettävän käyttöliittymän.
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{kayttoliittyma}
-    \caption{EppaBasicin käyttöiittymä}
+    \caption{EppaBasicin käyttöliittymä. Ylhäällä työkalupalkki, vasemmalla koodimuokkain ja oikealla käyttöohje.}
     \label{img:kayttoliittyma}
 \end{figure}
 
@@ -82,25 +79,93 @@ ja toiminnoille ohje esimerkkeineen.
 
 EppaBasicin käyttämä tekstinmuokkain mahdollistaa
 virheiden ilmoittamisen käyttäjälle jo hänen
-kirjoittaessaan koodia.
+koodia kirjoitettaessa.
 Näin käyttäjä saa heti palautetta tekemistään
 virheistä ja voi korjata ne samantien.
 Jos käyttäjä ei huomaa virheen syytä,
 hän voi lukea virheen sisältämän
-kuvauksen virheestään omalla kielellään.
+kuvauksen virheestään omalla kielellään
+(ks. Kuva \ref{img:virhe}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{virhe}
+    \caption{EppaBasicin koodimuokkain, jossa näkyy käyttäjän tekemä virhe sekä virheen selitys.}
+    \label{img:virhe}
+\end{figure}
 
 \subsection{Kieli}
 EppaBasicin-ympäristön toinen osa on
 itse ohjelmointikieli.
+
+EppaBasicin avulla voi helposti
+piirtää yksinkertaisia geometrisiä
+muotoja (ks. Koodi \ref{code:geometria.eb}).
+Muotojen värin vaihtaminen
+onnistuu myös helposti.
+Jotta piirretyt kuviot
+päivittyisivät näytölle,
+täytyy kutsua
+\eb{DrawScreen}-funktiota.
+
+Heittomerkin \eb{'} jälkeinen
+teksti rivillä on kommenttia,
+jota EppaBasic ei suorita.
+Kommentit on tarkoitettu
+ohjelmoijalle selkeyttämään
+koodia.
+
+\codeandimage{geometria}{Geometriaesimerkki}{code:geometria}
+
+EppaBasicissa on yksinkertainen
+\eb{For}-toistorakenne, jonka
+avulla voi suorittaa saman
+koodin monta kertaa.
+Toistettava koodi alkaa
+\eb{For}-avainsanaa seuraavalta
+riviltä ja loppuu ennen riviä,
+jolla on \eb{Next}-avainsana.
+\eb{For}-rakenteen sisällä voi
+käyttää toistorakenteessa määriteltyä
+muuttujaa, jonka arvo käy läpi
+kaikki luvut annetulla välillä
+(ks. Koodi \ref{code:for-geometria}).
+
+\codeandimage{for-geometria}{Geometriaa \eb{For}-rakenteella}{code:for-geometria}
+
+\eb{For}-toistorakennetta voi
+käyttää myös matemaattisten 
+ongelmien ratkausemiseen
+(ks. Koodi \ref{code:for-summa}).
+
+\codeandimage{for-summa}{Ensimmäisen sadan positiivisen kokonaisluvun neliöiden summa.}{code:for-summa}
+
+EppaBasicia voi käyttää myös
+kokonaisten pelien luomiseen.
+Tästä esimerkkinä toimii
+kielellä tehty moninpelattava
+pong-peli (ks. Kuva \ref{img:pong}),
+jota voi kokeilla myös
+EppaBasicin sivustolla.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{pong}
+    \caption{EppaBasicilla toteutettu kahdenpelattava pong-peli.}
+    \label{img:pong}
+\end{figure}
+
+\begin{comment}
 EppaBasic koostuu Basiceille tyypillisesti
-englanninkielisistä avainsanista.
+englanninkielisistä avainsanoista
+ja funktion nimistä.
 Komentrakenee koostuvat avainsanapareista,
 joista parin ensimmäinen sana aloiaa komenorakenteen
 ja toinen lopettaa sen.
 Tällaisia pareja ovat esimerkiksi
-$If$ ja $End If$,
-$For$ ja $Next$
-sekä $Do$ ja $Loop$.
+\eb{If} ja \eb{End If},
+\eb{For} ja \eb{Next}
+sekä \eb{Do} ja \eb{Loop}.
 Näin lopettavan avainsanan nähdessä on selvää,
 minkä tyyppisen rakenteen se lopettaa,
 tosin kuin esimerkiksi C-pohjaisissa
@@ -109,7 +174,6 @@ kielissä, joissa kaikki rakenteet alkavat
 Myös rivinvaihdot ovat merkityksellisiä
 Basic-kielissä, sillä jokainen lauseke
 on kirjoitettava omalle rivilleen.
-
 
 EppaBasic on vahvasti ja staattisesti tyypitetty.
 Vahva tyypittäminen tarkoittaa sitä,
@@ -122,3 +186,4 @@ Näin ei tule vahingossa tilanteita,
 joissa muuttuja sisältääkin jotain muuta kuin pitäisi.
 \fxnote{Ehkä jokin havainnollistus väärästä tyypistä,
 kuten ''jossa lompakosta löytyykin kissa eikä rahaa''}
+\end{comment}
