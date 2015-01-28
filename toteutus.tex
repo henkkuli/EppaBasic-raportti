@@ -110,7 +110,7 @@ muuttujaviittaukset ja vakiot.
 
 EppaBasicin ensivaihe muodostuu
 kolmesa osasta:
-lukijasta (eng. lexer)m
+lukijasta (eng. lexer),
 jäsentäjästä (eng. parser) ja
 tyyppientarkastajasta.
 
@@ -118,12 +118,12 @@ Lukija lukee lähdekoodin alusta loppuun
 ja jakaa sen merkityksellisiin osiin,
 merkkeihin (eng. token),
 Merkkejä ovat erilaiset kielen
-avainsanat ($If$, $Then$, $EndIf$, jne.),
-luvut ($15$, $-30$, jne.),
-merkkijonot ($''HelloWorld''$, $''Teksti\ddot{a}''$, jne.),
-muuttujien ja funktioiden nimet ($Print$, $x$, jne.),
-kommentit ($' Kommentit\ alkavat\ heittomerkill\ddot{a}$, jne.),
-erikoismerkit ($+$, $-$, $\char`\^$, jne.) sekä
+avainsanat (\eb{If}, \eb{Then}, \eb{EndIf}, jne.),
+luvut (\eb{15}, \eb{-30}, jne.),
+merkkijonot (\eb{"HelloWorld"}, \eb{"Tekstiä"}, jne.),
+muuttujien ja funktioiden nimet (\eb{Print}, \eb{x}, jne.),
+kommentit (\eb{' Kommentit alkavat heittomerkillä}, jne.),
+erikoismerkit (\eb{+}, \eb{-}, \eb{^}, jne.) sekä
 rivinvaihdot ja välilyöntimerkit.
 Jos lukija löytää pätkän koodia,
 jota se ei voi jakaa kuuluvaksi
