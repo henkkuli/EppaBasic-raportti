@@ -1,0 +1,146 @@
+' Asetetaan ikkunan koko
+WindowSize 900, 600         ' Leveys 900, korkeus 600
+
+' Asetuksia
+Dim PallonSäde As Number = 10
+Dim MailanPaksuus As Number = 30
+Dim MailanEtäisyys As Number = 20
+Dim MailanLeveys As Number = 100
+Dim MailanNopeus As Number = 5
+
+' Muuttujat pallon sijainnille
+Dim PalloX As Number
+Dim PalloY As Number
+' Ja suunalle
+Dim PalloNopeusX As Number
+Dim PalloNopeusY As Number
+
+' Vasemman mailan sijainti
+Dim Vasen As Number
+' Oikean mailan sijainti
+Dim Oikea As Number
+' Ja pisteet mailoille
+Dim VasenPisteet As Number
+Dim OikeaPisteet As Number 
+
+' Pelin nykyinen tila
+Dim Tila As String = "Alusta"
+
+' Päätoisto
+Do
+    ' Tarkistetaan ohjelman tila ja toimitaan sen mukaan
+    If Tila = "Alusta" Then
+        AlustaPeli
+    Else If Tila = "Nollaa" Then
+        NollaaPallo
+    Else If Tila = "Pelaa" Then
+        PäivitäPeli
+        PiirräPeli
+    End If
+Loop
+
+''' Apufunktioita '''
+' Pelin alustamisfunktiot
+Sub AlustaPeli()
+    ' Nollataan pallo
+    NollaaPallo
+    ' Ja pisteet myös
+    VasenPisteet = 0
+    OikeaPisteet = 0
+End Sub
+Sub NollaaPallo()
+    ' Asetetaan pelaus tilaan
+    Tila = "Pelaa"
+    ' Asetetaan pallo keskelle ruutua
+    PalloX = WindowWidth()/2
+    PalloY = WindowHeight()/2
+    ' Arvotaan satunnainen suunta
+    Dim Suunta = 2*3.141*Rnd()
+    PalloNopeusX = 3 * Sin(Suunta)
+    PalloNopeusY = 3 * Cos(Suunta)
+End Sub
+    
+' Funktio päivättää pelin
+Sub PäivitäPeli()
+    ' Päivitetään vasen maila
+    If KeyDown(83) Then                 ' S-näppäin
+        Vasen = Vasen + MailanNopeus
+    Else If KeyDown(87) Then            ' W-näppäin
+        Vasen = Vasen - MailanNopeus
+    End If
+    
+    ' Päivitetään oikea maila
+    If KeyDown(40) Then                 ' Nuoli alas
+        Oikea = Oikea + MailanNopeus
+    Else If KeyDown(38) Then            ' Nuoli ylös
+        Oikea = Oikea - MailanNopeus
+    End If
+    
+    ' Liikuta palloa
+    PalloX = PalloX + PalloNopeusX
+    PalloY = PalloY + PalloNopeusY
+    
+    ' Pompautetaan palloa katosta ja lattiasta
+    If PalloY < PallonSäde Then
+        PalloY = PallonSäde
+        PalloNopeusY = -PalloNopeusY
+    End IF
+    If PalloY > WindowHeight() - PallonSäde Then
+        PalloY = WindowHeight() - PallonSäde
+        PalloNopeusY = -PalloNopeusY
+    End If
+    
+    ' Pompautetan palloa vasemmasta mailoista
+    If PalloX - PallonSäde < MailanEtäisyys + MailanPaksuus Then
+        ' Pallo on mailan takana
+        If PalloY > Vasen And PalloY < Vasen + MailanLeveys Then
+            ' Osuttiin mailaan
+            PalloNopeusX = -PalloNopeusX
+        Else
+            ' Huti -> Piste oikealle mailalle
+            OikeaPisteet = OikeaPisteet + 1
+            Tila = "Nollaa"
+        End If
+    End If
+    
+    ' Pompautetan palloa oikeasta mailoista
+    If PalloX + PallonSäde > WindowWidth() - MailanEtäisyys - MailanPaksuus Then
+        ' Pallo on mailan takana
+        If PalloY > Oikea And PalloY < Oikea + MailanLeveys Then
+            ' Osuttiin mailaan
+            PalloNopeusX = -PalloNopeusX
+        Else
+            ' Huti -> Piste vasemmalle mailalle
+            VasenPisteet = VasenPisteet + 1
+            Tila = "Nollaa"
+        End If
+    End If
+End Sub
+' Ja tämä piirtää pelin
+Sub PiirräPeli()
+    ' Tyhjennä näyttö
+    ClearScreen
+    
+    ' Piirrä pallo
+    FillColor 200, 10, 20           ' Punertava
+    FillCircle PalloX, PalloY, PallonSäde
+    
+    ' Piirrä vasen maila
+    FillColor 200, 220, 30          ' Keltainen
+    FillRect MailanEtäisyys, Vasen, MailanPaksuus, MailanLeveys
+    
+    ' Piirrä oikea maila
+    FillColor 30, 220, 200          ' Turkoosi
+	' Apumuuttujia sijainnille
+	Dim X = WindowWidth() - MailanEtäisyys - MailanPaksuus
+    FillRect X, Oikea, MailanPaksuus, MailanLeveys
+    
+    ' Piirrä tulos
+    TextColor 255, 255, 255         ' Valkoinen
+    TextAlign 3                     ' Keskitetään teksti
+    TextSize 50                     ' Tekstin koko
+    DrawText WindowWidth()/2, 10, VasenPisteet & " - " & OikeaPisteet
+    
+    ' Päivitä näyttö
+    DrawScreen
+End Sub
