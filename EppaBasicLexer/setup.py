@@ -7,5 +7,7 @@ setup (
 	"""
 	[pygments.lexers]
 	eppabasiclexer = eppabasiclexer.lexer:EppaBasicLexer
+	[pygments.styles]
+	eppabasic = eppabasiclexer.style:EppaBasicStyle
 	""",
 )
