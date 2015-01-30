@@ -70,8 +70,8 @@ suorittamisen helposti.
 Eräs tapa jakaa kääntäjä osiin on jakaa
 se kolmeen osaan:
 ensivaiheeseen (eng. front-end),
-välivaiheeseen (eng.middleware) ja
-loppuvaiheeseen (eng. back.end).
+välivaiheeseen (eng. middleware) ja
+loppuvaiheeseen (eng. back-end).
 EppaBasicissa ei ole erillistä välivaihetta,
 sillä kääntäjä ei vielä tarvitse sellaista.
 Tulevaisuudessa on tarkoitus toteuttaa
@@ -254,7 +254,7 @@ jQuery-kirjaston \cite{jquery} avulla,
 mikä yksinkertaistaa ohjainten rakennetta huomattavasti.
 
 Käyttöliittymän palvelimeen yhteydessä olevat
-moduulit käyttävät ajax-pyyntöjä
+moduulit käyttävät Ajax-pyyntöjä
 (Asyn\-chro\-nous JavaScript + XML).
 Tällaisia moduuleja ovat esimerkiksi
 kirjautumisen hallinta ja tiedostojen tallentaminen.
@@ -265,7 +265,7 @@ ja palauttaa vastauksen JSON-muodossa.
 Käyttöliittymän tarjoama ohjekirja on kirjoitettu
 käyttämen Markdown-merkkausta \cite{markdown}.
 Käyttäjän navigoidessa ohjekirjasivulle
-JavaScript-koodi hakee Ajaxin avulla palvelimelta
+JavaScript-koodi hakee Ajax:in avulla palvelimelta
 oikean ohjekirjasivun Markdown-muodossa,
 joka muutetaan selaimen päässä HTML-muotoon käyttäen
 marked-kirjastoa \cite{marked}
@@ -289,6 +289,18 @@ Ensivaihe kertoo käyttöliittymälle löytämistään virheistä,
 jotka käyttöliittymä näyttää käyttäjälle käyttämällä
 Acen huomautuksia (eng. annotations).
 
+\subsection{Palvelin}
+EppaBasic-palvelin vastaa käyttöliitymän Ajax-pyyntöihin
+vastaamisesta. Käytännössä palvelimelle tallennetaan
+siis esimerkiksi rekisteröityjen käyttäjien koodit.
+
+Palvelin on toteutettu Django-sovelluskehystä (eng. framework)
+hyödyntäen. Django perustuus MVC-malliin (Model View Controller),
+mikä auttaa tietoturvallisten sivustojen kehityksessä. Koodien
+pysyvänä tallennuspaikkana toimii SQL-tietokanta (Structured Query Language).
+Kaikki pyynnöt menevät Apache-palvelimen läpi, joka jakaa staattiset
+tiedostot ja välittää tarvittavat pyynnöt
+Django-sovelluspalvelimelle (eng. application server).
 
 \subsection{Suoritusympäristö}
 EppaBasicin suoritusympäristö on erillinen verkkosivu,
