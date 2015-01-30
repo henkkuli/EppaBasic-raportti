@@ -1,10 +1,9 @@
 \section{EppaBasic-ympäristö}
-\fxnote{Kokoa tänne tavoitteet, käyttöliittymä ja kieli}
-
 Tässä kappaleessa kerron EppaBasic-ympäristöstä
 eli käyttöliittymästä ja ohjelmointikielestä.
 Aluksi kuitenkin kerron ympäristölle
 asettamistamme tavoitteista.
+\fxnote{Laajenna tai poista}
 
 \subsection{Tavoitteet}
 EppaBasicin tärkein tavoite on olla
@@ -18,14 +17,20 @@ Varsinkin aloittelijoille ohjelman aukeaminen
 viime vuosituhannelta tuttuun komentokehotteen
 voi olla hyvinkin epätyydyttävää.
 \fxnote{Media computation}
+\fxnote{Vika virke paremmin}
 
 Toinen EppaBasicin tärkeä tavoite on olla
 mahdollisimman helposti käyttöönotettava,
 sillä usein uutta ohjelmointikieltä opetellessa
 kuluu useita tunteja jo pelkän
 ohjelmointiympäristön asentamiseen.
-Tämä voi lannistaa aloittelijan
-ohjelmointihalut jo alkuunsa.
+Ympäristön asentamiseksi usein
+tätyy asentaa erikseen koodin
+kirjoittamiseen käytettävä ohjelma
+ja koodia ymmärtävä kääntäjä,
+sekä määrittää asetukset oikein.
+Lisäksi koodin jakaminen
+voi olla hankalaa.
 EppaBasic onkin toteutettu
 selaimessa toimivaksi, joten
 käyttöönottaminen onnistuu
@@ -78,10 +83,10 @@ EppaBasicin tarjoamille funktioille
 ja toiminnoille ohje esimerkkeineen.
 
 EppaBasicin käyttämä tekstinmuokkain mahdollistaa
-virheiden ilmoittamisen käyttäjälle jo hänen
+virheiden ilmoittamisen käyttäjälle jo
 koodia kirjoitettaessa.
 Näin käyttäjä saa heti palautetta tekemistään
-virheistä ja voi korjata ne samantien.
+virheistä ja voi korjata ne saman tien.
 Jos käyttäjä ei huomaa virheen syytä,
 hän voi lukea virheen sisältämän
 kuvauksen virheestään omalla kielellään
@@ -89,7 +94,7 @@ kuvauksen virheestään omalla kielellään
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{virhe}
+    \includegraphics[width=0.5\textwidth]{virhe}
     \caption{EppaBasicin koodimuokkain, jossa näkyy käyttäjän tekemä virhe sekä virheen selitys.}
     \label{img:virhe}
 \end{figure}
@@ -97,16 +102,26 @@ kuvauksen virheestään omalla kielellään
 \subsection{Kieli}
 EppaBasicin-ympäristön toinen osa on
 itse ohjelmointikieli.
+Ohjelmointikieli tukee
+muuttujia,
+ehto- ja toistorakenteita,
+matemaattisten lausekkeiden laskemista,
+funktioita,
+merkkijonoja,
+taulukoita sekä
+omien funktioiden
+ja aliohjelmien luomista.
+EppaBasicissa on myös
+laaja standardikirjasto,
+jossa on matematiikka-,
+merkkijono-, syöte- ja
+grafiikkakomentoja.
 
 EppaBasicin avulla voi helposti
 piirtää yksinkertaisia geometrisiä
 muotoja (ks. Koodi \ref{code:geometria}).
 Muotojen värin vaihtaminen
 onnistuu myös helposti.
-Jotta piirretyt kuviot
-päivittyisivät näytölle,
-täytyy kutsua
-\eb{DrawScreen}-funktiota.
 
 Heittomerkin \eb{'} jälkeinen
 teksti rivillä on kommenttia,
@@ -138,52 +153,20 @@ käyttää myös matemaattisten
 ongelmien ratkausemiseen
 (ks. Koodi \ref{code:for-summa}).
 
-\codeandimage{for-summa}{Ensimmäisen sadan positiivisen kokonaisluvun neliöiden summa.}{code:for-summa}
+\codeandimage{for-summa}{Ohjelma, joka laskee summan $1^2+2^2+3^2+...+100^2$.}{code:for-summa}
 
 EppaBasicia voi käyttää myös
 kokonaisten pelien luomiseen.
 Tästä esimerkkinä toimii
 kielellä tehty moninpelattava
-pong-peli (ks. Kuva \ref{img:pong}),
+pong-peli
+(ks. Kuva \ref{img:pong} ja Liite \ref{app:pong}),
 jota voi kokeilla myös
 EppaBasicin sivustolla.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{pong}
+    \includegraphics[width=0.5\textwidth]{pong}
     \caption{EppaBasicilla toteutettu kahdenpelattava pong-peli.}
     \label{img:pong}
 \end{figure}
-
-\begin{comment}
-EppaBasic koostuu Basiceille tyypillisesti
-englanninkielisistä avainsanoista
-ja funktion nimistä.
-Komentrakenee koostuvat avainsanapareista,
-joista parin ensimmäinen sana aloiaa komenorakenteen
-ja toinen lopettaa sen.
-Tällaisia pareja ovat esimerkiksi
-\eb{If} ja \eb{End If},
-\eb{For} ja \eb{Next}
-sekä \eb{Do} ja \eb{Loop}.
-Näin lopettavan avainsanan nähdessä on selvää,
-minkä tyyppisen rakenteen se lopettaa,
-tosin kuin esimerkiksi C-pohjaisissa
-kielissä, joissa kaikki rakenteet alkavat
-\{-merkillä ja loppuvat \}-merkkiin.
-Myös rivinvaihdot ovat merkityksellisiä
-Basic-kielissä, sillä jokainen lauseke
-on kirjoitettava omalle rivilleen.
-
-EppaBasic on vahvasti ja staattisesti tyypitetty.
-Vahva tyypittäminen tarkoittaa sitä,
-että tyypit muuttuvat vain erikoistapauksissa toisikseen
-lausekkeita evaluoidessa.
-Staattinen tyypittäminen tarkoittaa sitä,
-että tietyn tyyppiseen muuttujaan voidaan tallentaa
-vain muuttujan tyypin mukaisia arvoja.
-Näin ei tule vahingossa tilanteita,
-joissa muuttuja sisältääkin jotain muuta kuin pitäisi.
-\fxnote{Ehkä jokin havainnollistus väärästä tyypistä,
-kuten ''jossa lompakosta löytyykin kissa eikä rahaa''}
-\end{comment}

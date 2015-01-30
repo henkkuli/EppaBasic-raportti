@@ -24,6 +24,3 @@ DrawColor 0, 0, 255         ' Sininen
 ' kolmen kulman koordinaatit
 FillTriangle 250, 20, 300, 15, 200, 400
 DrawTriangle 250, 20, 300, 15, 200, 400
-
-' Lopuksi piirretään kuviot näytölle
-DrawScreen
