@@ -259,18 +259,18 @@ jQuery-kirjaston \cite{jquery} avulla,
 mikä yksinkertaistaa ohjainten rakennetta huomattavasti.
 
 Käyttöliittymän palvelimeen yhteydessä olevat
-moduulit käyttävät ajax-pyyntöjä
+moduulit käyttävät Ajax-pyyntöjä
 (Asyn\-chro\-nous JavaScript + XML).
 Tällaisia moduuleja ovat esimerkiksi
 kirjautumisen hallinta ja tiedostojen tallentaminen.
-Palvelimella pyörivä python-rajapinta varmistaa,
+Palvelimella pyörivä Python-rajapinta varmistaa,
 että pyytäjällä on oikeus pyytämiinsä tietoihin,
 ja palauttaa vastauksen JSON-muodossa.
 
 Käyttöliittymän tarjoama ohjekirja on kirjoitettu
 käyttämen Markdown-merkkausta \cite{markdown}.
 Käyttäjän navigoidessa ohjekirjasivulle
-JavaScript-koodi hakee ajaxin avulla palvelimelta
+JavaScript-koodi hakee Ajax:in avulla palvelimelta
 oikean ohjekirjasivun Markdown-muodossa,
 joka muutetaan selaimen päässä HTML-muotoon käyttäen
 marked-kirjasto \cite{marked}
@@ -293,6 +293,15 @@ Ensivaihe kertoo käyttöliittymälle löytämistään virheistä,
 jotka käyttöliittymä näyttää käyttäjälle käyttämällä
 Acen huomautuksia (eng. annotations).
 
+\subsection{Palvelin}
+EppaBasic-palvelin vastaa käyttöliitymän Ajax-pyyntöihin
+vastaamisesta. Käytännössä palvelimelle tallennetaan
+siis esimerkiksi rekisteröityjen käyttäjien koodit.
+
+Palvelin on toteuttu Django-sovelluskehystä (eng. framework)
+hyödyntäen. Django perustuus MVC-malliin (Model View Controller),
+mikä auttaa tietoturvallisten sivustojen kehityksessä. Koodien
+pysyvänä tallennuspaikkana toimii SQL-tietokanta.
 
 \subsection{Ajoympäristö}
 EppaBasicin ajoympäristö on erillinen verkkosivu,
