@@ -48,6 +48,7 @@ Sub AlustaPeli()
     VasenPisteet = 0
     OikeaPisteet = 0
 End Sub
+
 Sub NollaaPallo()
     ' Asetetaan pelaus tilaan
     Tila = "Pelaa"
@@ -135,6 +136,7 @@ Sub PäivitäPeli()
         End If
     End If
 End Sub
+
 ' Ja tämä piirtää pelin
 Sub PiirräPeli()
     ' Tyhjennä näyttö
