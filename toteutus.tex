@@ -59,24 +59,19 @@ puuttuvat toiminnallisuudet.
 
 
 \subsection{Kääntäjä}
-EppaBasicin kääntäjä koostuu kahdesta osasta:
-ensivaiheesta (eng. front-end) ja
-loppuvaiheesta (eng. back-end).
-Molemmat vaiheet on jaettu omiin moduuleihinsa,
-minkä lisäksi kääntäjässä on yksi apumoduuli,
-joka mahdollistaa eri kääntäjän vaiheiden
-suorittamisen helposti.
-
-Eräs tapa jakaa kääntäjä osiin on jakaa
-se kolmeen osaan:
+Eräs tapa hahmottaa kääntäjää
+on jakaa se kolmeen osaan:
 ensivaiheeseen (eng. front-end),
 välivaiheeseen (eng. middleware) ja
 loppuvaiheeseen (eng. back-end).
-EppaBasicissa ei ole erillistä välivaihetta,
-sillä kääntäjä ei vielä tarvitse sellaista.
-Tulevaisuudessa on tarkoitus toteuttaa
-välivaiheeseen muun muassa optimoija,
-joka nopeuttaa koodin suoritusta.
+EppaBasicin kääntäjä koostuu vain
+ensivaiheesta ja loppuvaiheesta,
+sillä EppaBasic ei vielä toistaiseksi
+tarvitse välivaihetta.
+Tulevaisuudessa välivaiheeseen
+on tarkoitus toteuttaa muun muassa
+optimoija, joka nopeuttaa
+koodin suoritusta.
 
 \subsubsection{Ensivaihe}
 Ensivaihe on kääntämisen ensimmäinen vaihe.
@@ -99,10 +94,9 @@ funktiomäärityksillä
 on omat solmunsa, joilla on eri määrä lapsia.
 Puun lehtiä ovat esimerkiksi
 muuttujaviittaukset ja vakiot.
-\fxnote{Tarkista määritelmä eac2e:stä}
 
 EppaBasicin ensivaihe muodostuu
-kolmesta osasta:
+kolmesa osasta:
 selaajasta (eng. lexer),
 jäsentäjästä (eng. parser) ja
 tyyppientarkastajasta.
@@ -157,7 +151,7 @@ paluuarvojen tyypit.
 Samalla tyyppientarkastaja selvittää,
 mihin määritykseen jokainen muuttujan
 käyttö viittaa ja mihin funktiomääritykseen
-jokainen funktiokutsu viittaa.
+jokainen funktiokutus viittaa.
 
 \subsubsection{Loppuvaihe}
 Loppuvaihe on kääntämisen viimeinen vaihe,
@@ -265,7 +259,7 @@ Käyttäjän navigoidessa ohjekirjasivulle
 JavaScript-koodi hakee Ajax:in avulla palvelimelta
 oikean ohjekirjasivun Markdown-muodossa,
 joka muutetaan selaimen päässä HTML-muotoon käyttäen
-marked-kirjastoa \cite{marked}.
+marked-kirjastoa \cite{marked}
 Näin ohjekirja voidaan tarvittaessa myöhemmin
 myös tulostaa ja palvelimen ei tarvitse tehdä
 yhtä paljon työtä kuin jos
@@ -305,9 +299,15 @@ käyttäjien koodit, toimii SQL-tietokanta (Structured Query Language).
 \subsection{Suoritusympäristö}
 EppaBasicin suoritusympäristö on erillinen verkkosivu,
 joka tarjoaa kaikille EppaBasicilla kirjoitetuille
-ohjelmille yhteiset toiminnot, kuten piirto-,
+ohjeilmille yhteiset toiminnot, kuten piirto-,
 merkkijono- ja matematiikkafunktiot sekä
 koodin suorittamisen ajastamiseen tarvittavat toiminnot.
+Myös suoritusympäristön voi laskea kuuluvaksi käyttöliittymään,
+mutta esittelen sen erillään muusta käyttöliittymästä,
+sillä se tarjoaa käyttöliittymänä vain piirtopinnan
+ja syötteiden lukemisen, mutta ohjelmallisena
+komponenttina rajapinnan ja suoritusalusta kääntäjän
+kääntämien ohjelmien suorittamiselle.
 
 Suoritusympäristö aukeaa automaattisesti uuteen selainikkunaan
 käyttäjän suorittaessa ohjelman ja koodin käännyttyä.
@@ -386,7 +386,7 @@ on toteutettu joko käyttämällä kolmannen osapuolen
 tarjoamaa toteutusta tai yksinkertaisissa
 tapauksissa toteuttamalla itse.
 
-Työskentelijä pitää yllä sisäistä tilaa,
+Työskentelijä pitää sisäistä tilaa,
 joka sisältää esimerkiksi nykyisen piirtovärin
 sekä näppäimistön pohjassa olevat painikkeet.
 Sisäinen tila voi muuttua kahdella tavalla:
