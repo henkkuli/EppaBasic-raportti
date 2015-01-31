@@ -19,7 +19,7 @@ Dim PalloNopeusY As Number
 Dim Vasen As Number  = WindowHeight() / 2 - MailanLeveys / 2
 ' Oikean mailan sijainti
 Dim Oikea As Number = Vasen
-' Ja pisteet mailoille
+' Ja pisteet pelaajille
 Dim VasenPisteet As Number
 Dim OikeaPisteet As Number 
 
@@ -65,14 +65,14 @@ Sub NollaaPallo()
     End If
     
     If Rnd(0, 1) = 1 Then
-        Suunta = Suunta + 3.14
+        Suunta = Suunta + 3.14153
     End If
     
     PalloNopeusX = 3 * Cos(Suunta)
     PalloNopeusY = 3 * Sin(Suunta)
 End Sub
     
-' Funktio päivättää pelin
+' Funktio päivittää pelin
 Sub PäivitäPeli()
     ' Päivitetään vasen maila
     If KeyDown(83) Then                 ' S-näppäin
