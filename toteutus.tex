@@ -258,9 +258,6 @@ moduulit käyttävät Ajax-pyyntöjä
 (Asyn\-chro\-nous JavaScript + XML).
 Tällaisia moduuleja ovat esimerkiksi
 kirjautumisen hallinta ja tiedostojen tallentaminen.
-Palvelimella pyörivä Python-rajapinta varmistaa,
-että pyytäjällä on oikeus pyytämiinsä tietoihin,
-ja palauttaa vastauksen JSON-muodossa.
 
 Käyttöliittymän tarjoama ohjekirja on kirjoitettu
 käyttämen Markdown-merkkausta \cite{markdown}.
@@ -290,17 +287,20 @@ jotka käyttöliittymä näyttää käyttäjälle käyttämällä
 Acen huomautuksia (eng. annotations).
 
 \subsection{Palvelin}
-EppaBasic-palvelin vastaa käyttöliitymän Ajax-pyyntöihin
-vastaamisesta. Käytännössä palvelimelle tallennetaan
-siis esimerkiksi rekisteröityjen käyttäjien koodit.
+EppaBasic-palvelin jakaa kehitysympäristön tiedostoja ja
+vastaa käyttöliittymän Ajax-pyyntöihin vastaamisesta. Ensimmäisellä
+tasolla pyyntö menee Apache-palvelimelle (yleisesti käytössä oleva WWW-palvelin).
+Apache-palvelin jakaa staattiset tiedostot ja ohjaa dynaamiset pyynnöt
+eteenpäin sovelluspalvelimelle (eng. application server).
 
-Palvelin on toteutettu Django-sovelluskehystä (eng. framework)
-hyödyntäen. Django perustuus MVC-malliin (Model View Controller),
-mikä auttaa tietoturvallisten sivustojen kehityksessä. Koodien
-pysyvänä tallennuspaikkana toimii SQL-tietokanta (Structured Query Language).
-Kaikki pyynnöt menevät Apache-palvelimen läpi, joka jakaa staattiset
-tiedostot ja välittää tarvittavat pyynnöt
-Django-sovelluspalvelimelle (eng. application server).
+Sovelluspalvelin on toteutttu Django-sovelluskehystä (eng. framework)
+hyödyntäen. Django perustuu moderniin MVC-malliin (Model View Controller),
+joka helpottaa tietoturvallisten sivustojen kehitystä.
+Sovelluspalvelin käsittelee dynaamiset Ajax-pyynnöt
+varmistaen, että pyytäjällä on oikeus pyytämiinsä tietoihin,
+ja palauttaa vastauksen JSON-muodossa. Pysyvänä tiedon
+tallennuspaikkana, johon tallennetaan esimerkiksi rekisteröityjen
+käyttäjien koodit, toimii SQL-tietokanta (Structured Query Language).
 
 \subsection{Suoritusympäristö}
 EppaBasicin suoritusympäristö on erillinen verkkosivu,
