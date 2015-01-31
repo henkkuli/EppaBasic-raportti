@@ -16,9 +16,9 @@ Dim PalloNopeusX As Number
 Dim PalloNopeusY As Number
 
 ' Vasemman mailan sijainti
-Dim Vasen As Number
+Dim Vasen As Number  = WindowHeight() / 2 - MailanLeveys / 2
 ' Oikean mailan sijainti
-Dim Oikea As Number
+Dim Oikea As Number = Vasen
 ' Ja pisteet mailoille
 Dim VasenPisteet As Number
 Dim OikeaPisteet As Number 
@@ -55,9 +55,20 @@ Sub NollaaPallo()
     PalloX = WindowWidth()/2
     PalloY = WindowHeight()/2
     ' Arvotaan satunnainen suunta
-    Dim Suunta = 2*3.141*Rnd()
-    PalloNopeusX = 3 * Sin(Suunta)
-    PalloNopeusY = 3 * Cos(Suunta)
+    Dim Suunta = Rnd() - 0.5
+    
+    If Suunta < 0 Then 
+        Suunta = Suunta - 0.2
+    Else
+        Suunta = Suunta + 0.2
+    End If
+    
+    If Rnd(0, 1) = 1 Then
+        Suunta = Suunta + 3.14
+    End If
+    
+    PalloNopeusX = 3 * Cos(Suunta)
+    PalloNopeusY = 3 * Sin(Suunta)
 End Sub
     
 ' Funktio päivättää pelin
@@ -96,6 +107,10 @@ Sub PäivitäPeli()
         If PalloY > Vasen And PalloY < Vasen + MailanLeveys Then
             ' Osuttiin mailaan
             PalloNopeusX = -PalloNopeusX
+            
+            ' Kasvatetaan pallon nopeutta
+            PalloNopeusX = PalloNopeusX * 1.1
+            PalloNopeusY = PalloNopeusY * 1.1
         Else
             ' Huti -> Piste oikealle mailalle
             OikeaPisteet = OikeaPisteet + 1
@@ -109,6 +124,10 @@ Sub PäivitäPeli()
         If PalloY > Oikea And PalloY < Oikea + MailanLeveys Then
             ' Osuttiin mailaan
             PalloNopeusX = -PalloNopeusX
+            
+            ' Kasvatetaan pallon nopeutta
+            PalloNopeusX = PalloNopeusX * 1.1
+            PalloNopeusY = PalloNopeusY * 1.1
         Else
             ' Huti -> Piste vasemmalle mailalle
             VasenPisteet = VasenPisteet + 1
@@ -131,13 +150,11 @@ Sub PiirräPeli()
     
     ' Piirrä oikea maila
     FillColor 30, 220, 200          ' Turkoosi
-	' Apumuuttujia sijainnille
-	Dim X = WindowWidth() - MailanEtäisyys - MailanPaksuus
-    FillRect X, Oikea, MailanPaksuus, MailanLeveys
+    FillRect WindowWidth()-MailanEtäisyys-MailanPaksuus, Oikea, MailanPaksuus, MailanLeveys
     
     ' Piirrä tulos
     TextColor 255, 255, 255         ' Valkoinen
-    TextAlign 3                     ' Keskitetään teksti
+    TextAlign 3                     ' Tekstin piirtokoordinaatti on tekstin keskellä
     TextSize 50                     ' Tekstin koko
     DrawText WindowWidth()/2, 10, VasenPisteet & " - " & OikeaPisteet
     
