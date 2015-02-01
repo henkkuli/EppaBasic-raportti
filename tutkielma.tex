@@ -17,8 +17,6 @@
 \usepackage{lmodern}
 \usepackage{microtype}
 
-\newcommand{\sectionbreak}{\clearpage}
-
 % Tyylejä
 \setlength{\parindent}{0mm}
 \setlength{\parskip}{3mm plus0.5mm minus0.5mm}
@@ -62,6 +60,7 @@
 
 	% Sisältö alkaa tästä
 	\setcounter{page}{1}
+	\newcommand{\sectionbreak}{\clearpage}
 	
 	\input{johdanto}
 	\input{aikaisempaa}
