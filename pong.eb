@@ -1,3 +1,4 @@
+' Vasen pelaaja ohjaa W- ja S-näppäimillä, oikea pelaaja ylös- ja alasnuolinäppäimillä
 ' Asetetaan ikkunan koko
 CanvasSize 900, 600
 WindowSize 900, 600         ' Leveys 900, korkeus 600
