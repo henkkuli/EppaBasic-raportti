@@ -43,7 +43,7 @@ että jotkin selaimet osaavat
 suorittaa koodia tavallista
 nopeammin.
 Esimerkiksi uudet Mozilla Firefox
-ja Google Chrome versiot
+ja Google Chrome -versiot
 suorittavat
 asm.js-koodia nopeammin
 kuin vastaavaa tavallista
@@ -61,13 +61,13 @@ puuttuvat toiminnallisuudet.
 \subsection{Kääntäjä}
 Tavallinen tapa hahmottaa kääntäjää
 on jakaa se kolmeen osaan:
-ensivaiheeseen (eng. front-end),
-välivaiheeseen (eng. middleware) ja
-loppuvaiheeseen (eng. back-end)
+ensivaiheeseen (engl. front-end),
+välivaiheeseen (engl. middleware) ja
+loppuvaiheeseen (engl. back-end)
 \cite[luku 1.2]{eac2e}.
 EppaBasicin kääntäjä koostuu vain
 ensivaiheesta ja loppuvaiheesta,
-sillä EppaBasic ei vielä toistaiseksi
+sillä EppaBasic ei toistaiseksi
 tarvitse välivaihetta.
 Tulevaisuudessa välivaiheeseen
 on tarkoitus toteuttaa
@@ -85,7 +85,7 @@ koodissa olevista virheistä.
 
 EppaBasicin kääntäjä käyttää sisäisenä
 esitysmuotonaan abstraktia syntaksipuuta
-(eng. abstract syntax tree, AST).
+(engl. abstract syntax tree, AST).
 Siinä puun juuri vastaa koko ohjelmaa,
 ja jokainen solmu vastaa tiettyä
 syntaksillista osaa.
@@ -98,13 +98,13 @@ muuttujaviittaukset ja vakiot.
 
 EppaBasicin ensivaihe muodostuu
 kolmesta osasta:
-selaajasta (eng. lexer),
-jäsentäjästä (eng. parser) ja
+selaajasta (engl. lexer),
+jäsentäjästä (engl. parser) ja
 tyyppientarkastajasta.
 
 Selaaja lukee lähdekoodin alusta loppuun
 ja jakaa sen merkityksellisiin osiin,
-alkionimiin (eng. token),
+alkionimiin (engl. token),
 Alkionimiä ovat erilaiset kielen
 avainsanat (\eb{If}, \eb{Then}, \eb{EndIf}, jne.),
 luvut (\eb{15}, \eb{-30}, jne.),
@@ -124,7 +124,7 @@ ohjelmakoodin AST-puun.
 EppaBasicin jäsentäjä on tyypiltään
 \emph{käsinkirjoitettu, rekursiivinen,
 ylhäältä-alas-jäsentäjä}
-(eng. \emph{hand-coded, recursive-descent,
+(engl. \emph{hand-coded, recursive-descent,
 top-down parser} \cite[luku 3.3.2]{eac2e}).
 EppaBasic käyttää tällaista jäsentäjää,
 koska se on yksinkertainen toteuttaa,
@@ -170,7 +170,7 @@ että EppaBasic mahdollistaa ruudun piirtämisen
 keskellä komentorakenteita.
 JavaScriptissä (ja siten myös asm.js:ssä)
 ruudun päivittäminen ja käyttäjän syötteiden
-lukeminen vaatii sen, että JavaScript-koodin
+lukeminen vaatii, että JavaScript-koodin
 suorittaminen loppuu hetkeksi.
 JavaScriptissä ei kuitenkaan ole
 mahdollista tallentaa suorituksen tilaa
@@ -184,12 +184,12 @@ keskeltä komentorakennetta.
 Loppuvaihe merkitsee jokaiselle
 AST-puun solmulle atomisuuden
 eli jakamattomuuden.
-Jakamattomuus merkitsee sitä,
+Jakamattomuus merkitsee,
 että suoritusta ei tarvitse eikä voi
 katkaista kyseisen solmun sisällä.
 Kaikki solmut ovat aluksi atomisia.
 Sen jälkeen merkitään jokainen
-funktion \eb{DrawScreen} (päivittää ruudun)
+funktion \eb{DrawScreen} (ruudun päivitys)
 kutsu epäatomiseksi.
 Tämän jälkeen merkitään solmuja
 epäatomisiksi, jos jokin niiden
@@ -202,7 +202,7 @@ Nyt loppuvaihe voi jakaa koodin
 mahdollisimman pitkiin atomisiin osiin.
 Vaihe luo jokaiselle atomiselle osalle oman
 funktionsa ja antaa funktioille indeksin.
-Ohjelman suorituksen aluksi kutsupinossa
+Ohjelman suorituksen alussa kutsupinossa
 on yksi alkio: ohjelman ensimmäinen
 atominen osa.
 Funktio päivittää suorituksensa
@@ -265,7 +265,7 @@ yhtä paljon työtä kuin jos
 muunnos tehtäisiin palvelimella.
 
 Ohjelmakoodin muokkaamiseen EppaBasic käyttää
-Ace\hyp tekstinmuokkauskomponenttia \cite{ace_about}.
+Ace\hyp komponenttia \cite{ace_about}.
 Komponentti mahdollistaa omien syntaksiväritysten luomisen.
 Syntaksiväritys selkeyttää koodin lukemista,
 sillä avainsanojen erottaminen helpottuu.
@@ -277,16 +277,16 @@ kääntäjän ensivaihe mahdollisuuksien mukaan
 taustasäikeessä web workerin \cite{w3c_web_worker} avulla.
 Ensivaihe kertoo käyttöliittymälle löytämistään virheistä,
 jotka käyttöliittymä näyttää käyttäjälle käyttämällä
-Acen huomautuksia (eng. annotations).
+Acen huomautuksia (engl. annotations).
 
 \subsection{Palvelin}
 EppaBasic-palvelin jakaa kehitysympäristön tiedostoja ja
 hoitaa käyttöliittymän Ajax-pyyntöihin vastaamisen. Ensimmäisellä
 tasolla pyyntö menee Apache-palvelimelle \cite{apache}.
 Apache-palvelin jakaa staattiset tiedostot ja ohjaa dynaamiset pyynnöt
-eteenpäin sovelluspalvelimelle (eng. application server).
+eteenpäin sovelluspalvelimelle (engl. application server).
 
-Sovelluspalvelin on toteutttu Django-sovelluskehystä \cite{django} (eng. framework)
+Sovelluspalvelin on toteutttu Django-sovelluskehystä \cite{django} (engl. framework)
 hyödyntäen. Django perustuu MVC-malliin (Model View Controller),
 joka helpottaa tietoturvallisten sivustojen kehitystä.
 Sovelluspalvelin käsittelee dynaamiset Ajax-pyynnöt
@@ -301,11 +301,9 @@ joka tarjoaa kaikille EppaBasicilla kirjoitetuille
 ohjelmille yhteiset toiminnot, kuten piirto-,
 merkkijono- ja matematiikkafunktiot sekä
 koodin suorittamisen ajastamiseen tarvittavat toiminnot.
-Myös suoritusympäristön voi laskea kuuluvaksi käyttöliittymään,
-mutta se esitellään erillään muusta käyttöliittymästä,
-sillä se tarjoaa käyttöliittymänä vain piirtopinnan
-ja syötteiden lukemisen, mutta ohjelmallisena
-komponenttina rajapinnan ja suoritusalusta kääntäjän
+Suoritusympäristö tarjoaa käyttöliittymänä piirtopinnan
+ja syötteiden lukemisen sekä ohjelmallisena komponenttina
+rajapinnan ja suoritusalusta kääntäjän
 kääntämien ohjelmien suorittamiselle.
 
 Suoritusympäristö aukeaa automaattisesti uuteen selainikkunaan
@@ -320,7 +318,7 @@ JavaScript-ohjelma, joka huolehtii
 näytön piirtämisestä ja käyttäjän syötteiden lukemisesta.
 Työskentelijä suoritetaan omassa säikeessään.
 Näin saadaan ohjelman suoritus eristettyä
-irralleen käyttöliittymätoiminnoista.
+käyttöliittymätoiminnoista.
 Jos näin ei tehtäisi, ohjelman suorituksen
 aikaessa selain ei vastaisi käyttäjän
 syötteisiin ennen suorituksen taukoamista.
@@ -343,9 +341,8 @@ tavallista monimutkaisempaan rakenteeseen.
 
 \subsubsection{Piirtäjä}
 Piirtäjä on suoritusympäristön komponentti,
-joka nimensä mukaisesti huolehtii
-grafiikan piirtämisestä,
-mutta myös käyttäjän syötteiden kirjaamisesta.
+joka huolehtii grafiikan piirtämisestä
+sekä käyttäjän syötteiden kirjaamisesta.
 Grafiikan piirtämiseen käytetään
 HTML5 Canvas -elementtiä,
 joka on nykyään tuettu kaikissa
@@ -359,11 +356,11 @@ Yksi viesti sisältää useita piirtokomentoja,
 jotka kaikki suoritetaan taustapuskuriin ennen
 canvas-elementin päivittämistä.
 Tätä kutsutaan kaksoispuskuroinniksi
-(eng. double-buffering).
+(engl. double-buffering).
 
 Syötteen (näppäimistö ja hiiri) lukemiseksi
 piirtäjä kuuntelee kaikkia suoritusympäristön
-näp\-päin- ja hiiritapahtumia (eng. events).
+näp\-päin- ja hiiritapahtumia (engl. events).
 Tapahtuman sattuessa piirtäjä
 lähettää tiedon muutoksesta työskentelijälle,
 joka päivittää omaa tilaansa.
