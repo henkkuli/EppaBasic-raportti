@@ -2,15 +2,15 @@
 
 \section{Tekninen toteutus}
 Jotta EppaBasic toimisi mahdollisimman monella
-tietokonejärjestelmällä laitteistosta ja
+tietokoneella laitteistosta ja
 käyttöjärjestelmästä riippumatta,
 päätimme toteuttaa kaiken ohjelmointi-
 ja suoritusympäristöä myöten
 selainpohjaisesti.
-Näin EppaBasic toimii niin
+Näin EppaBasic toimii
 Windows-, Linux- ja OS X -koneilla
-kuin myös monilla mobiililaitteilla.
-Lisäksi modernit selaimet tarjoavat
+sekä monilla mobiililaitteilla.
+Modernit selaimet tarjoavat
 monia hyödyllisiä ominaisuuksia
 kuten yksinkertaisen tavan toteuttaa
 käyttöliittymiä (HTML \cite{w3c_html})
@@ -18,7 +18,7 @@ sekä tehokkaan tavan piirtää grafiikkaa
 näytölle (HTML Canvas \cite{mdn_canvas}).
 Koko ohjelmakoodi EppaBasicin takana
 on kirjoitettu JavaScriptillä,
-joka on ainoa yleisesti selaimissa
+joka on yleisesti selaimissa
 tuettu ohjelmointikieli \cite{mdn_about_js}.
 
 JavaScript-koodi EppaBasicin takana
@@ -26,7 +26,7 @@ on jaettu moduuleihin koodin
 rakenteen selkeyttämiseksi.
 Moduulien lataamiseen käytettään
 RequireJS-kirjastoa \cite{requirejs}.
-Moduulien käyttämällä voi kirjoittaa
+Moduuleita käyttämällä voi kirjoittaa
 selkeämpää koodia kuin ilman moduuleja,
 koska moduulien riippuvuudet ovat
 näkyvissä moduulin määrittelyssä.
@@ -59,17 +59,18 @@ puuttuvat toiminnallisuudet.
 
 
 \subsection{Kääntäjä}
-Eräs tapa hahmottaa kääntäjää
+Tavallinen tapa hahmottaa kääntäjää
 on jakaa se kolmeen osaan:
 ensivaiheeseen (eng. front-end),
 välivaiheeseen (eng. middleware) ja
-loppuvaiheeseen (eng. back-end).
+loppuvaiheeseen (eng. back-end)
+\cite[luku 1.2]{eac2e}.
 EppaBasicin kääntäjä koostuu vain
 ensivaiheesta ja loppuvaiheesta,
 sillä EppaBasic ei vielä toistaiseksi
 tarvitse välivaihetta.
 Tulevaisuudessa välivaiheeseen
-on tarkoitus toteuttaa muun muassa
+on tarkoitus toteuttaa
 optimoija, joka nopeuttaa
 koodin suoritusta.
 
@@ -96,7 +97,7 @@ Puun lehtiä ovat esimerkiksi
 muuttujaviittaukset ja vakiot.
 
 EppaBasicin ensivaihe muodostuu
-kolmesa osasta:
+kolmesta osasta:
 selaajasta (eng. lexer),
 jäsentäjästä (eng. parser) ja
 tyyppientarkastajasta.
@@ -128,8 +129,6 @@ top-down parser} \cite[luku 3.3.2]{eac2e}).
 EppaBasic käyttää tällaista jäsentäjää,
 koska se on yksinkertainen toteuttaa,
 helposti ymmärrettävä ja tehokas.
-Näin ominaisuuksien lisääminen
-kääntäjään on helppoa.
 
 Rekursiivinen ylhäältä-alas-jäsentäjä
 toimii siten, että funktion aluksi
@@ -166,7 +165,7 @@ läpi AST-puun.
 Jokainen AST-puun solmu muutetaan
 vastaavaksi pätkäksi asm.js-koodia.
 
-EppaBasicin loppuvaihetta monimutkaistaa se,
+Loppuvaihetta monimutkaistaa se,
 että EppaBasic mahdollistaa ruudun piirtämisen
 keskellä komentorakenteita.
 JavaScriptissä (ja siten myös asm.js:ssä)
@@ -254,9 +253,9 @@ Tällaisia moduuleja ovat esimerkiksi
 kirjautumisen hallinta ja tiedostojen tallentaminen.
 
 Käyttöliittymän tarjoama ohjekirja on kirjoitettu
-käyttämen Markdown-merkkausta \cite{markdown}.
-Käyttäjän navigoidessa ohjekirjasivulle
-JavaScript-koodi hakee Ajax:in avulla palvelimelta
+käyttäen Markdown-merkkausta \cite{markdown}.
+Kun käyttäjä menee ohjekirjasivulle,
+JavaScript-koodi hakee Ajaxin avulla palvelimelta
 oikean ohjekirjasivun Markdown-muodossa,
 joka muutetaan selaimen päässä HTML-muotoon käyttäen
 marked-kirjastoa \cite{marked}
@@ -265,7 +264,7 @@ myös tulostaa ja palvelimen ei tarvitse tehdä
 yhtä paljon työtä kuin jos
 muunnos tehtäisiin palvelimella.
 
-Ohjelmakoodin muokkaamiseen EppaBasic käytettää
+Ohjelmakoodin muokkaamiseen EppaBasic käyttää
 Ace\hyp tekstinmuokkauskomponenttia \cite{ace_about}.
 Komponentti mahdollistaa omien syntaksiväritysten luomisen.
 Syntaksiväritys selkeyttää koodin lukemista,
@@ -282,28 +281,28 @@ Acen huomautuksia (eng. annotations).
 
 \subsection{Palvelin}
 EppaBasic-palvelin jakaa kehitysympäristön tiedostoja ja
-vastaa käyttöliittymän Ajax-pyyntöihin vastaamisesta. Ensimmäisellä
-tasolla pyyntö menee Apache-palvelimelle (yleisesti käytössä oleva WWW-palvelin).
+hoitaa käyttöliittymän Ajax-pyyntöihin vastaamisen. Ensimmäisellä
+tasolla pyyntö menee Apache-palvelimelle \cite{apache}.
 Apache-palvelin jakaa staattiset tiedostot ja ohjaa dynaamiset pyynnöt
 eteenpäin sovelluspalvelimelle (eng. application server).
 
-Sovelluspalvelin on toteutttu Django-sovelluskehystä (eng. framework)
-hyödyntäen. Django perustuu moderniin MVC-malliin (Model View Controller),
+Sovelluspalvelin on toteutttu Django-sovelluskehystä \cite{django} (eng. framework)
+hyödyntäen. Django perustuu MVC-malliin (Model View Controller),
 joka helpottaa tietoturvallisten sivustojen kehitystä.
 Sovelluspalvelin käsittelee dynaamiset Ajax-pyynnöt
 varmistaen, että pyytäjällä on oikeus pyytämiinsä tietoihin,
 ja palauttaa vastauksen JSON-muodossa. Pysyvänä tiedon
 tallennuspaikkana, johon tallennetaan esimerkiksi rekisteröityjen
-käyttäjien koodit, toimii SQL-tietokanta (Structured Query Language).
+käyttäjien koodit, toimii PostgreSQL-tietokanta \cite{postgresql}.
 
 \subsection{Suoritusympäristö}
 EppaBasicin suoritusympäristö on erillinen verkkosivu,
 joka tarjoaa kaikille EppaBasicilla kirjoitetuille
-ohjeilmille yhteiset toiminnot, kuten piirto-,
+ohjelmille yhteiset toiminnot, kuten piirto-,
 merkkijono- ja matematiikkafunktiot sekä
 koodin suorittamisen ajastamiseen tarvittavat toiminnot.
 Myös suoritusympäristön voi laskea kuuluvaksi käyttöliittymään,
-mutta esittelen sen erillään muusta käyttöliittymästä,
+mutta se esitellään erillään muusta käyttöliittymästä,
 sillä se tarjoaa käyttöliittymänä vain piirtopinnan
 ja syötteiden lukemisen, mutta ohjelmallisena
 komponenttina rajapinnan ja suoritusalusta kääntäjän
@@ -311,7 +310,7 @@ kääntämien ohjelmien suorittamiselle.
 
 Suoritusympäristö aukeaa automaattisesti uuteen selainikkunaan
 käyttäjän suorittaessa ohjelman ja koodin käännyttyä.
-Suoritusympäristö pyytää muokkausikkunalta käännetyn kooodin,
+Suoritusympäristö pyytää muokkausikkunalta käännetyn koodin,
 minkä jälkeen suoritusympäristö alustaa itsensä ja suorittaa koodin.
 
 Suoritusympärstö koostuu kahdesta osasta:
@@ -323,7 +322,7 @@ Työskentelijä suoritetaan omassa säikeessään.
 Näin saadaan ohjelman suoritus eristettyä
 irralleen käyttöliittymätoiminnoista.
 Jos näin ei tehtäisi, ohjelman suorituksen
-kestäessä selain ei vastaisi käyttäjän
+aikaessa selain ei vastaisi käyttäjän
 syötteisiin ennen suorituksen taukoamista.
 
 Piirtäjä ja työskentelijä keskustelevat
@@ -349,7 +348,7 @@ grafiikan piirtämisestä,
 mutta myös käyttäjän syötteiden kirjaamisesta.
 Grafiikan piirtämiseen käytetään
 HTML5 Canvas -elementtiä,
-joka on nykyään tuettu kaikissa moderneissa
+joka on nykyään tuettu kaikissa
 selaimissa \cite{caniuse_canvas}.
 Canvas mahdollistaa yksinkertaisten
 geometristen muotojen piirtämisen tehokkaasti,
@@ -369,7 +368,7 @@ Tapahtuman sattuessa piirtäjä
 lähettää tiedon muutoksesta työskentelijälle,
 joka päivittää omaa tilaansa.
 
-\subsubsection{Työskenteljiä}
+\subsubsection{Työskentelijä}
 Työskentelijä on suoritusympäristön osa,
 joka suorittaa käännetyn koodin.
 Työskentelijä ajetaan taustasäikeessä
@@ -383,8 +382,7 @@ muuttamalla JavaScriptin tarjoamat valmiit
 funktiot EppaBasicin ymmärtämään muotoon.
 Ne funktiot, joita JavaScript ei suoraan tarjoa,
 on toteutettu joko käyttämällä kolmannen osapuolen
-tarjoamaa toteutusta tai yksinkertaisissa
-tapauksissa toteuttamalla itse.
+tarjoamaa toteutusta tai toteuttamalla itse.
 
 Työskentelijä pitää sisäistä tilaa,
 joka sisältää esimerkiksi nykyisen piirtovärin
