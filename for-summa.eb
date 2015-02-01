@@ -7,7 +7,8 @@
 Dim summa = 0
 ' Käydään läpi luvut 1 ... 100
 For luku = 1 To 100
-    ' Kasvatetaan summaa neliön verran
+    ' Kasvatetaan summaa
+    ' luvun neliön verran
     summa = summa + luku^2
 Next luku
 

@@ -1,4 +1,5 @@
 ' Asetetaan ikkunan koko
+CanvasSize 900, 600
 WindowSize 900, 600         ' Leveys 900, korkeus 600
 
 ' Asetuksia
@@ -19,7 +20,7 @@ Dim PalloNopeusY As Number
 Dim Vasen As Number  = WindowHeight() / 2 - MailanLeveys / 2
 ' Oikean mailan sijainti
 Dim Oikea As Number = Vasen
-' Ja pisteet pelaajille
+' Ja pisteet mailoille
 Dim VasenPisteet As Number
 Dim OikeaPisteet As Number 
 
@@ -55,24 +56,19 @@ Sub NollaaPallo()
     ' Asetetaan pallo keskelle ruutua
     PalloX = WindowWidth()/2
     PalloY = WindowHeight()/2
-    ' Arvotaan satunnainen suunta
-    Dim Suunta = Rnd() - 0.5
+    ' Arvotaan satunnainen kulma
+    Dim Suunta = 2 * (Rnd() - 0.5)
     
-    If Suunta < 0 Then 
-        Suunta = Suunta - 0.2
-    Else
-        Suunta = Suunta + 0.2
-    End If
-    
+    ' Arvotaan, alkaako peli oikealle vai vasemmalle
     If Rnd(0, 1) = 1 Then
-        Suunta = Suunta + 3.14153
+        Suunta = Suunta + ebPi
     End If
     
     PalloNopeusX = 3 * Cos(Suunta)
     PalloNopeusY = 3 * Sin(Suunta)
 End Sub
     
-' Funktio päivittää pelin
+' Funktio päivättää pelin
 Sub PäivitäPeli()
     ' Päivitetään vasen maila
     If KeyDown(83) Then                 ' S-näppäin
